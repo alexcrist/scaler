@@ -20,6 +20,7 @@ const Notes = ({ enabledNotes, setEnabledNotes, periodDuration, isPlaying }) => 
     <div className={styles.notes}>
       {enabledNotes.map((isEnabled, i) => 
         <div
+          key={i}
           onClick={() => toggleNote(i)}
           className={`${styles.note} ${isEnabled ? styles.enabled : ''}`} 
         />

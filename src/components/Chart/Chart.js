@@ -1,4 +1,4 @@
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Legend, Tooltip } from 'recharts';
+import { LineChart, Line, CartesianGrid, Tooltip } from 'recharts';
 import formulaToData from '../../util/formulaToData';
 import styles from './Chart.module.css';
 
@@ -12,14 +12,22 @@ const COLORS = [
   '#ffbe0b',
 ];
 
-const Chart = ({ formulas }) => {
+const Chart = ({
+  formulas,
+  numNotes,
+  noteRange,
+  notes
+}) => {
 
-  console.log(formulas);
+  noteRange = noteRange - 1;
+  if (noteRange < 1) {
+    noteRange = 1;
+  }
 
   const xMin = 0;
   const xMax = 2 * Math.PI;
-  const numX = 100;
-  const xInc = (xMax - xMin) / 100;
+  const numX = numNotes * 100;
+  const xInc = (xMax - xMin) / numX;
 
   const xRange = [];
   for (let i = 0; i < numX; i++) {
@@ -39,7 +47,7 @@ const Chart = ({ formulas }) => {
   const data = [];
   for (let i = 0; i < numX; i++) {
     const x = xRange[i];
-    const dataPoint = { name: x };
+    const dataPoint = { name: i };
 
     for (let j = 0; j < formulaDatas.length; j++) {
       const key = `f${j}`;
@@ -48,6 +56,16 @@ const Chart = ({ formulas }) => {
     }
 
     data.push(dataPoint);
+  }
+
+  const verticalPoints = [];
+  for (let i = 0; i < numNotes + 1; i++) {
+    verticalPoints.push(i * W / numNotes);
+  }
+
+  const horizontalPoints = [];
+  for (let i = 0; i < noteRange + 1; i++) {
+    horizontalPoints.push(i * H / noteRange);
   }
 
   return (
@@ -61,8 +79,8 @@ const Chart = ({ formulas }) => {
         <CartesianGrid
           stroke='#ccc'
           strokeDasharray='3 3' 
-          verticalPoints={[0, W / 4, W / 2, 3 * W / 4, W]}
-          horizontalPoints={[0, H / 4, H / 2, 3 * H / 4, H]}
+          verticalPoints={verticalPoints}
+          horizontalPoints={horizontalPoints}
         />
         {formulaDatas.map((_, i) => 
           <Line
@@ -75,8 +93,10 @@ const Chart = ({ formulas }) => {
           />
         )}
 
-        {/* <XAxis dataKey='name' type='number' domain={['dataMin', 'dataMax']} /> */}
-        <Tooltip />
+        <Tooltip
+          formatter={(_, __, props) => notes[Math.round(props.payload.name / 100)]}
+          labelFormatter={(label) => Math.round(label / 100)} 
+        />
       </LineChart>
 
     </div>

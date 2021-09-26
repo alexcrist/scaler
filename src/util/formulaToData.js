@@ -1,6 +1,5 @@
 import _ from 'lodash';
 
-
 const formulaToData = (formula, xValues) => {
   formula = formula.replace(/\s+/g, '');
   formula = formula.replace(/sin/g, 'Math.sin');

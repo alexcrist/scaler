@@ -38,8 +38,9 @@
   flex: 1;
 }
 
-.input:focus {
-  border: 1px solid #666;
+.input:not(:disabled):hover {
+  border-color: #999;
+  cursor: pointer;
 }
 
 .labels {
@@ -50,8 +51,13 @@
 }
 
 .labels:first-child label:not(:first-child) {
-  width: 100px;
+  width: 93px;
   flex: none;
+}
+
+.labels:nth-child(3) label:nth-child(3),
+  .labels:nth-child(3) label:nth-child(4) {
+  padding-right: 14px;
 }
 
 label {
@@ -59,7 +65,7 @@ label {
   font-weight: bold;
   font-size: 12px;
   flex: 1;
-  margin-left: 4px;
+  margin: 0 5px;
   color: #999;
 }
 

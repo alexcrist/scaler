@@ -1,16 +1,14 @@
-var AudioContext = window.AudioContext ||
-window.webkitAudioContext;
-
+const AudioContext = window.AudioContext || window.webkitAudioContext;
 const context = new AudioContext();
 
-const masterVolume = context.createGain();
-masterVolume.gain.value = 0.05;
-masterVolume.connect(context.destination);
-
-export const play = (freq) => {
+export const play = (freq, noteDuration) => {
+  noteDuration = noteDuration || 85;
+  const masterVolume = context.createGain();
+  masterVolume.gain.setValueCurveAtTime(new Float32Array([0, 0.8, 1, 0.3, 0].map(v => v * 0.05)), context.currentTime, noteDuration / 1000);
+  masterVolume.connect(context.destination);
   const oscillator = context.createOscillator();
   oscillator.connect(masterVolume);
   oscillator.frequency.setValueAtTime(freq, 0);
   oscillator.start(0);
-  setTimeout(() => oscillator.stop(), 100);
+  setTimeout(() => oscillator.stop(), noteDuration);
 };

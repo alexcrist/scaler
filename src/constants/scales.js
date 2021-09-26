@@ -7,10 +7,25 @@ export const SCALES = [
     notes: []
   },
   {
+    name: 'D minor',
+    pitches: ['D', 'E', 'F', 'G', 'A', 'Bb', 'C'],
+    notes: []
+  },
+  {
     name: 'D major',
     pitches: ['D', 'E', 'Gb', 'G', 'A', 'B', 'Db'],
     notes: []
-  }
+  },
+  {
+    name: 'E minor',
+    pitches: ['E', 'Gb', 'G', 'A', 'B', 'C', 'D'],
+    notes: []
+  },
+  {
+    name: 'E major',
+    pitches: ['E', 'Gb', 'G', 'A', 'B', 'C', 'D'],
+    notes: []
+  },
 ];
 
 for (const scale of SCALES) {
