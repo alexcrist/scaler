@@ -12,5 +12,5 @@ export const play = (freq) => {
   oscillator.connect(masterVolume);
   oscillator.frequency.setValueAtTime(freq, 0);
   oscillator.start(0);
-  setTimeout(() => oscillator.stop(), 200);
+  setTimeout(() => oscillator.stop(), 100);
 };

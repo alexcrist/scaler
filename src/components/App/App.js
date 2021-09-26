@@ -61,12 +61,10 @@ const App = () => {
   return (
     <div className={styles.container}>
 
-
-
       <div className={styles.labels}>
-        <label>Scale</label>
-        <label>Low note</label>
-        <label>Range</label>
+        <label>Formula</label>
+        <label>Period (ms)</label>
+        <label>Beats</label>
       </div>
 
       <div className={styles.inputs}>
@@ -92,7 +90,7 @@ const App = () => {
       <div className={styles.labels}>
         <label>Scale</label>
         <label>Low note</label>
-        <label>Range</label>
+        <label>Note range</label>
       </div>
 
       <div className={styles.inputs}>
