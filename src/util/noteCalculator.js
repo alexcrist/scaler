@@ -17,7 +17,13 @@ export const calculateNotes = (
     xValues.push(i / numNotes * 2 * Math.PI);
   }
 
-  const data = formulaToData(formula, xValues);
+  let data;
+  try {
+    data = formulaToData(formula, xValues);
+  } catch (e) {
+    return [];
+  }
+
   const minData = _.min(data);
   const maxData = _.max(data);
 
