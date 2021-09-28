@@ -1,5 +1,12 @@
 # Scaler
 
-<a href="https://alexcrist.github.io/scaler/" target="_">
-  <img src="demo.png" width="800px" />
-</a>
+https://alexcrist.github.io/scaler/
+
+## Feature wish list
+
+* Better implementation of scales
+* Change 'low note' to 'starting note'
+* Multiple formulas allowed
+* Allow sharing
+* Allow saving
+* View popular scales
