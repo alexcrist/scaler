@@ -1,9 +1,8 @@
 import _ from 'lodash';
+import { Parser } from 'expr-eval';
 
 const formulaToData = (formula, xValues) => {
   formula = formula.replace(/\s+/g, '');
-  formula = formula.replace(/sin/g, 'Math.sin');
-  formula = formula.replace(/cos/g, 'Math.cos');
 
   if (formula.substring(0,  2) !== 'y=') {
     throw Error('Invalid formula: ' + formula);
@@ -13,11 +12,11 @@ const formulaToData = (formula, xValues) => {
 
   const data = [];
   for (const x of xValues) {
-    const evalFormula = _.replace(formula, 'x', x);
     try {
-      data.push(eval(evalFormula));
+      const value = Parser.evaluate(formula, { x });
+      data.push(value);
     } catch (e) {
-      throw Error('Formula evaluation error: ' + evalFormula);
+      throw Error('Formula evaluation error: ' + formula);
     }
   }
 

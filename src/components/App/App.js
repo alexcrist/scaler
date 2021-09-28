@@ -11,17 +11,19 @@ const initailEnabledNotes = [];
 for (let i = 0; i < initialNumNotes; i++) {
   initailEnabledNotes.push(true);
 }
+const initialScaleIndex = 2;
+const initialScale = SCALES[initialScaleIndex];
 
 const App = () => {
 
   // State =====================================================================
 
-  const [formula, setFormula] = useState('y = sin(x) + cos(4*x)');
+  const [formula, setFormula] = useState('y = max(sin(x), cos(4*x))');
   const [enabledNotes, setEnabledNotes] = useState(initailEnabledNotes);
   const [isPlaying, setIsPlaying] = useState(false);
   const [periodDuration, setPeriodDuration] = useState(3000);
-  const [scale, setScale] = useState(SCALES[0]);
-  const [lowNote, setLowNote] = useState(SCALES[0].notes[7 * 3]);
+  const [scale, setScale] = useState(initialScale);
+  const [lowNote, setLowNote] = useState(initialScale.pitches[0] + '3');
   const [noteRange, setNoteRange] = useState(14);
   const [noteDuration, setNoteDuration] = useState(85);
 
@@ -147,7 +149,7 @@ const App = () => {
 
       <div className={styles.inputs}>
         <select className={styles.input} onChange={onChangeScale}>
-          {SCALES.map((scale, i) => <option value={i} key={i}>{scale.name}</option>)}
+          {SCALES.map((scale, i) => <option value={i} key={i} selected={i === initialScaleIndex}>{scale.name}</option>)}
         </select>
         <select className={styles.input} value={lowNote} onChange={onChangeLowNote}>
           {scale.notes.map((note, i) => <option value={note} key={i}>{note}</option>)}
