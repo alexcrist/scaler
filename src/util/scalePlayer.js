@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { NOTE_MAP } from "../constants/notes";
 import { play } from "./audioPlayer";
 

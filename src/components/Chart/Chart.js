@@ -1,4 +1,4 @@
-import { LineChart, Line, CartesianGrid, Tooltip } from 'recharts';
+import { LineChart, Line, CartesianGrid, Tooltip, YAxis } from 'recharts';
 import formulaToData from '../../util/formulaToData';
 import styles from './Chart.module.css';
 
@@ -28,7 +28,6 @@ const Chart = ({
   const xMax = 2 * Math.PI;
   const numX = numNotes * 100;
   const xInc = (xMax - xMin) / numX;
-
   const xRange = [];
   for (let i = 0; i < numX; i++) {
     xRange.push(i * xInc);
@@ -46,7 +45,6 @@ const Chart = ({
 
   const data = [];
   for (let i = 0; i < numX; i++) {
-    const x = xRange[i];
     const dataPoint = { name: i };
 
     for (let j = 0; j < formulaDatas.length; j++) {
@@ -62,7 +60,6 @@ const Chart = ({
   for (let i = 0; i < numNotes + 1; i++) {
     verticalPoints.push(i * W / numNotes);
   }
-
   const horizontalPoints = [];
   for (let i = 0; i < noteRange + 1; i++) {
     horizontalPoints.push(i * H / noteRange);
@@ -78,11 +75,11 @@ const Chart = ({
       >
         <CartesianGrid
           stroke='#ccc'
-          strokeDasharray='3 3' 
+          strokeDasharray='3 3'
           verticalPoints={verticalPoints}
           horizontalPoints={horizontalPoints}
         />
-        {formulaDatas.map((_, i) => 
+        {formulaDatas.map((_, i) =>
           <Line
             key={i}
             type='monotone'
@@ -92,13 +89,12 @@ const Chart = ({
             strokeWidth={3}
           />
         )}
-
         <Tooltip
           formatter={(_, __, props) => notes[Math.round(props.payload.name / 100)]}
-          labelFormatter={(label) => Math.round(label / 100)} 
+          labelFormatter={(label) => Math.round(label / 100)}
         />
+        <YAxis domain={['dataMin', 'dataMax']} hide={true} />
       </LineChart>
-
     </div>
   );
 }

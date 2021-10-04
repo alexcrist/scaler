@@ -4,9 +4,13 @@ https://alexcrist.github.io/scaler/
 
 ## Feature wish list
 
+* Multiple formulas allowed
+
 * Better implementation of scales
 * Change 'low note' to 'starting note'
-* Multiple formulas allowed
+
+* Customizable colors
+
 * Allow sharing
 * Allow saving
-* View popular scales
+* View other users' popular scalers

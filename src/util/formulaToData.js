@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { Parser } from 'expr-eval';
 
 const formulaToData = (formula, xValues) => {
