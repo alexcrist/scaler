@@ -1,102 +1,101 @@
-import { LineChart, Line, CartesianGrid, Tooltip, YAxis } from 'recharts';
+import { LineChart, Line, Tooltip, YAxis, ResponsiveContainer, ReferenceLine } from 'recharts';
+import { COLORS, GRAY_1, OPACITY_1, OPACITY_2, OPACITY_3 } from '../../constants/colors';
 import formulaToData from '../../util/formulaToData';
 import styles from './Chart.module.css';
 
-const W = 730;
-const H = 250;
-const COLORS = [
-  '#8338ec',
-  '#ff006e',
-  '#3a86ff',
-  '#fb5607',
-  '#ffbe0b',
-];
+const H = 300;
 
 const Chart = ({
-  formulas,
-  numNotes,
-  noteRange,
-  notes
+  tracks,
+  trackIndex,
+  setTracks,
+  numBeats,
 }) => {
 
-  noteRange = noteRange - 1;
-  if (noteRange < 1) {
-    noteRange = 1;
+  const xValues = [];
+  const numXValues = numBeats * 100;
+  for (let i = 0; i < numXValues + 1; i++) {
+    xValues.push(i * (2 * Math.PI) / numXValues);
   }
 
-  const xMin = 0;
-  const xMax = 2 * Math.PI;
-  const numX = numNotes * 100;
-  const xInc = (xMax - xMin) / numX;
-  const xRange = [];
-  for (let i = 0; i < numX; i++) {
-    xRange.push(i * xInc);
-  }
-
-  const formulaDatas = formulas
-    .map(f => {
+  const yValuesArray = tracks
+    .map((track) => {
       try {
-        return formulaToData(f, xRange);
+        return formulaToData(track.formula, xValues);
       } catch (e) {
-        return null;
+        return [];
       }
-    })
-    .filter(f => f !== null);
+    });
 
-  const data = [];
-  for (let i = 0; i < numX; i++) {
-    const dataPoint = { name: i };
+  const data = xValues.map((x) => ({ x }));
 
-    for (let j = 0; j < formulaDatas.length; j++) {
-      const key = `f${j}`;
-      const y = formulaDatas[j][i];
-      dataPoint[key] = y;
+  for (let i = 0; i < yValuesArray.length; i++) {
+    const name = `Track ${i + 1}`;
+    const yValues = yValuesArray[i];
+    for (let j = 0; j < yValues.length; j++) {
+      const y = yValues[j];
+      data[j][name] = y;
     }
-
-    data.push(dataPoint);
   }
 
-  const verticalPoints = [];
-  for (let i = 0; i < numNotes + 1; i++) {
-    verticalPoints.push(i * W / numNotes);
+  const xLines = [];
+  for (let i = 0; i < numBeats + 1; i++) {
+    xLines.push(
+      <ReferenceLine
+        key={`x-line-${i}`}
+        x={i / numBeats * numXValues}
+        strokeDasharray='3 3'
+      />
+    );
   }
-  const horizontalPoints = [];
-  for (let i = 0; i < noteRange + 1; i++) {
-    horizontalPoints.push(i * H / noteRange);
+
+  const yLines = [];
+  for (let i = -3; i <= 3; i++) {
+    yLines.push(
+      <ReferenceLine
+        key={`y-line-${i}`}
+        y={i}
+        strokeDasharray='3 3'
+      />
+    );
   }
+
+  const getColor = (i) => {
+    const color = COLORS[i % COLORS.length];
+    const opacity = i === trackIndex ? '' : OPACITY_2;
+    return color + opacity;
+  };
 
   return (
-    <div className={styles.chart}>
-
-      <LineChart
-        width={W}
-        height={H}
-        data={data}
-      >
-        <CartesianGrid
-          stroke='#ccc'
-          strokeDasharray='3 3'
-          verticalPoints={verticalPoints}
-          horizontalPoints={horizontalPoints}
-        />
-        {formulaDatas.map((_, i) =>
-          <Line
-            key={i}
-            type='monotone'
-            dataKey={`f${i}`}
-            stroke={COLORS[i % COLORS.length] + '99'}
-            dot={false}
-            strokeWidth={3}
+    <div className={styles.container}>
+      <ResponsiveContainer width='100%' height={H}>
+        <LineChart
+          data={data}
+        >
+          {xLines}
+          {yLines}
+          {tracks.map((_, i) => (
+            <Line
+              key={`line-${i}`}
+              type='monotone'
+              dataKey={`Track ${i + 1}`}
+              // stroke={getColor(i)}
+              style={{ stroke: getColor(i) }}
+              dot={false}
+              strokeWidth={2}
+              animationDuration={600}
+              isAnimationActive={false}
+            />
+          ))}
+          <Tooltip
+            // formatter={(_, __, props) => notes[Math.round(props.payload.name / 100)]}
+            labelFormatter={(label) => Math.round(label / 100)}
           />
-        )}
-        <Tooltip
-          formatter={(_, __, props) => notes[Math.round(props.payload.name / 100)]}
-          labelFormatter={(label) => Math.round(label / 100)}
-        />
-        <YAxis domain={['dataMin', 'dataMax']} hide={true} />
-      </LineChart>
+          <YAxis domain={['dataMin', 'dataMax']} hide={true} />
+        </LineChart>
+      </ResponsiveContainer>
     </div>
   );
-}
+};
 
 export default Chart;

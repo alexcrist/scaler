@@ -1,87 +1,30 @@
-.container {
+.app {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 730px;
-  margin: auto;
+  padding: 20px;
 }
 
-.inputs {
-  display: flex;
-  width: 100%;
-}
-
-.input {
-  font-family: 'Courier New', Courier, monospace;
-  font-weight: bold;
-  font-size: 15px;
-  text-align: center;
-  border-radius: 4px;
-  outline: none;
-  border: 2px solid #ccc;
-  padding: 5px 0;
-  transition: border 300ms;
-  margin: 0 5px 0 5px;
-  width: 90px;
-}
-
-.input[type='number'] {
-  padding-left: 14px;
-  width: 76px;
-}
-
-.inputs:nth-child(4) .input {
+.left {
   flex: 1;
 }
 
-.input:first-child {
+.chart {
+  flex: 2;
+  padding: 0 10px;
+}
+
+.options {
   flex: 1;
 }
 
-.input:not(:disabled):hover {
-  border-color: #999;
+.createTrack {
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 2px;
+  border: 2px solid;
   cursor: pointer;
+  display: inline-block;
 }
 
-.labels {
-  display: flex;
-  width: 100%;
-  margin-top: 10px;
-  margin-bottom: 2px;
-}
-
-.labels:first-child label:not(:first-child) {
-  width: 93px;
-  flex: none;
-}
-
-.labels:nth-child(3) label:nth-child(3),
-  .labels:nth-child(3) label:nth-child(4) {
-  padding-right: 14px;
-}
-
-label {
-  font-family: 'Courier New', Courier, monospace;
-  font-weight: bold;
-  font-size: 12px;
-  flex: 1;
-  margin: 0 5px;
-  color: #999;
-}
-
-.play {
-  margin-top: 10px;
-  align-self: flex-start;
-  font-size: 15px;
-  padding: 5px 20px;
-  border-radius: 4px;
-  border: 2px solid #8338ec55;
-  cursor: pointer;
-  transition: all 300ms;
-  font-family: 'Courier New', Courier, monospace;
-  font-weight: bold;
-}
-
-.play:hover {
-  background-color: #8338ec55;
+.createTrack:hover {
+  opacity: 0.7;
 }

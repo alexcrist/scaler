@@ -1,0 +1,59 @@
+.container {
+  border: 2px solid;
+  padding: 10px;
+  border-radius: 2px;
+  margin-bottom: 10px;
+  transition: height 300ms;
+  height: 210px;
+  overflow: hidden;
+  color: white;
+}
+
+.container.collapsed {
+  cursor: pointer;
+  height: 18px;
+}
+
+.collapsed:hover {
+  opacity: 0.7;
+}
+
+.title {
+  font-size: 14px;
+}
+
+.title::before {
+  display: inline-block;
+  content: '^';
+  margin-right: 10px;
+  transform: rotate(180deg);
+  transform-origin: 50% 45%;
+  transition: all 300ms;
+  font-size: 14px;
+}
+
+.collapsed .title::before {
+  transform: rotate(90deg);
+}
+
+.label:first-child {
+  margin-top: 10px;
+}
+
+.label {
+  font-size: 12px;
+  display: block;
+  margin-top: 5px;
+}
+
+.input {
+  padding: 4px 10px;
+  border-radius: 2px;
+  border: 2px solid;
+  width: calc(100% - 24px);
+}
+
+.input:focus-visible {
+  border-color: black !important;
+  outline: none;
+}

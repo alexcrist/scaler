@@ -1,0 +1,8 @@
+* {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+}
+
+path, g {
+  transition: all 300ms;
+}
