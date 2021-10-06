@@ -1,0 +1,24 @@
+.container {
+  background-color: #1A5E6399;
+  border: 2px solid #1A5E6366;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text {
+  letter-spacing: 4px;
+  color: white;
+  font-style: italic;
+  font-size: 18px;
+}
+
+.link {
+  color: white;
+  font-size: 13px;
+  text-decoration: none;
+  font-style: italic;
+}

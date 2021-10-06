@@ -1,42 +1,28 @@
 import { NOTE_MAP } from "../constants/notes";
 import { play } from "./audioPlayer";
 
-let interval;
-let playIndex = 1;
+export const playScale = (dataRef, beatIndex = 0) => {
 
-export const playScale = (
-  notes,
-  enabledNotesRef, 
-  periodDuration,
-  noteDurationRef
-) => {
+  const {
+    tracks,
+    bpm,
+    notes,
+    numBeats,
+    isPlaying
+  } = dataRef.current;
 
-  const numNotes = enabledNotesRef.current.length;
+  if (!isPlaying) {
+    return;
+  } 
 
-  // Determine frequencies to play
-  const freqs = notes.map(note => NOTE_MAP[note]);
-
-  // Play first note
-  const freq = freqs[0];
-  const isEnabled = enabledNotesRef.current[0];
-  if (isEnabled) {
-    play(freq, noteDurationRef.current);
+  for (let i = 0; i < notes.length; i++) {
+    const note = notes[i][beatIndex];
+    const freq = NOTE_MAP[note];
+    const duration = tracks[i].noteDuration;
+    play(freq, duration);
   }
-  playIndex = 1;
 
-  // Create interval to play future notes
-  interval = setInterval(() => {
-    const freq = freqs[playIndex];
-    const isEnabled = enabledNotesRef.current[playIndex];
-    if (isEnabled) {
-      play(freq, noteDurationRef.current);
-    }
-    playIndex = (playIndex + 1) % numNotes;
-  }, periodDuration / numNotes);
+  const delay = (1 / bpm) * 60 * 1000;
+  const newBeatIndex = (beatIndex + 1) % numBeats;
+  setTimeout(() => playScale(dataRef, newBeatIndex), delay);
 };
-
-export const stopScale = () => {
-  clearInterval(interval);
-  playIndex = 0;
-};
-

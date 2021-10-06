@@ -1,5 +1,5 @@
 
-import { COLORS, OPACITY_1, OPACITY_2, OPACITY_3 } from '../../constants/colors';
+import { COLORS, OPACITY_1 } from '../../constants/colors';
 import styles from './TrackOptions.module.css';
 
 const Input = ({ index, ...props }) => {
@@ -42,21 +42,6 @@ const Inputs = ({
         index={index}
         value={formula}
         onChange={createAttributeSetter('formula')}
-      />
-
-      <label className={styles.label}>Low note</label>
-      <Input
-        index={index}
-        value={lowNote}
-        onChange={createAttributeSetter('lowNote')}
-      />
-
-      <label className={styles.label}>Note range</label>
-      <Input
-        index={index}
-        value={noteRange}
-        onChange={createAttributeSetter('noteRange')}
-        type='number'
       />
 
       <label className={styles.label}>Note duration (ms)</label>

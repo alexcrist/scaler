@@ -2,21 +2,13 @@ const getInitialTracks = () => {
   return [
     {
       formula: 'y = sin(x)',
-      bpm: 80,
-      numBeats: 8,
-      scale: 'Major',
-      lowNote: 'D3',
-      noteRange: 14,
-      noteDuration: 120
+      noteDuration: 80,
+      disabledBeats: []
     }, 
     {
-      formula: 'y = cos(x)',
-      bpm: 80,
-      numBeats: 8,
-      scale: 'Major',
-      lowNote: 'D3',
-      noteRange: 14,
-      noteDuration: 120
+      formula: 'y = (1 / (x + 0.5)) * cos(4 * x) - 2',
+      noteDuration: 300,
+      disabledBeats: []
     }
   ];
 }

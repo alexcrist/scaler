@@ -1,28 +1,37 @@
 .app {
   display: flex;
-  padding: 20px;
+  flex-direction: column;
+  padding: 10px 10px;
 }
 
-.left {
-  flex: 1;
+.row {
+  display: flex;
+}
+
+.loopOptions {
+  flex: 10;
 }
 
 .chart {
-  flex: 2;
-  padding: 0 10px;
+  flex: 12;
+  padding: 0 20px;
+  position: relative;
+  max-width: 35%;
 }
 
-.options {
-  flex: 1;
+.trackOptions {
+  flex: 10;
 }
 
 .createTrack {
   padding: 5px 10px;
-  font-size: 14px;
+  font-size: 15px;
   border-radius: 2px;
   border: 2px solid;
   cursor: pointer;
   display: inline-block;
+  user-select: none;
+  transition: opacity 300ms;
 }
 
 .createTrack:hover {

@@ -8,8 +8,8 @@ const H = 300;
 const Chart = ({
   tracks,
   trackIndex,
-  setTracks,
   numBeats,
+  notes,
 }) => {
 
   const xValues = [];
@@ -27,7 +27,7 @@ const Chart = ({
       }
     });
 
-  const data = xValues.map((x) => ({ x }));
+  const data = xValues.map((x, i) => ({ x, i }));
 
   for (let i = 0; i < yValuesArray.length; i++) {
     const name = `Track ${i + 1}`;
@@ -66,6 +66,13 @@ const Chart = ({
     return color + opacity;
   };
 
+  const formatter = (_, __,  properties) => {
+    const { dataKey, payload: { i } } = properties; 
+    const trackIndex = Number(dataKey[dataKey.length - 1]) - 1;
+    const beatIndex = Math.round(i / 100);
+    return notes[trackIndex][beatIndex];
+  };
+
   return (
     <div className={styles.container}>
       <ResponsiveContainer width='100%' height={H}>
@@ -79,8 +86,7 @@ const Chart = ({
               key={`line-${i}`}
               type='monotone'
               dataKey={`Track ${i + 1}`}
-              // stroke={getColor(i)}
-              style={{ stroke: getColor(i) }}
+              stroke={getColor(i)}
               dot={false}
               strokeWidth={2}
               animationDuration={600}
@@ -88,7 +94,7 @@ const Chart = ({
             />
           ))}
           <Tooltip
-            // formatter={(_, __, props) => notes[Math.round(props.payload.name / 100)]}
+            formatter={formatter}
             labelFormatter={(label) => Math.round(label / 100)}
           />
           <YAxis domain={['dataMin', 'dataMax']} hide={true} />

@@ -1,0 +1,20 @@
+@keyframes slide {
+  0% { 
+    left: 18px;
+  }
+  100% { 
+    left: calc(100% - 26px);
+  }
+}
+
+.arm {
+  position: absolute;
+  width: 4px;
+  height: 301px;
+  border-radius: 4px;
+  bottom: 20px;
+  background-color: #8338ec55;
+  animation: slide 4s linear infinite;
+  animation-delay: 0.1s;
+  left: 18px;
+}
