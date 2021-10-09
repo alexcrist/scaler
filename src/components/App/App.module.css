@@ -2,38 +2,60 @@
   display: flex;
   flex-direction: column;
   padding: 10px 10px;
+  min-height: calc(100vh - 20px);
 }
 
 .row {
   display: flex;
 }
 
-.loopOptions {
-  flex: 10;
+.left {
+  padding-right: 20px;
+  flex: 1;
+  width: 0;
 }
 
 .chart {
-  flex: 12;
-  padding: 0 20px;
   position: relative;
-  max-width: 35%;
+  width: 100%;
 }
 
-.trackOptions {
-  flex: 10;
+.right {
+  flex: 1;
+  padding-left: 20px;
+  max-width: 500px;
 }
 
-.createTrack {
-  padding: 5px 10px;
-  font-size: 15px;
-  border-radius: 2px;
-  border: 2px solid;
-  cursor: pointer;
-  display: inline-block;
-  user-select: none;
-  transition: opacity 300ms;
+.buttons {
+  display: flex;
+  margin-bottom: 30px;
 }
 
-.createTrack:hover {
-  opacity: 0.7;
+.buttons > * {
+  flex: 1;
+}
+
+.buttons > *:first-child {
+  margin-right: 5px;
+}
+
+.buttons > *:last-child {
+  margin-left: 5px;
+}
+
+@media screen and (max-width: 450px) {
+  .row {
+    flex-direction: column;
+  }
+
+  .left {
+    width: 100%;
+    padding-right: 0;
+    padding-bottom: 30px;
+  }
+
+  .right {
+    width: 100%;
+    padding-left: 0;
+  }
 }

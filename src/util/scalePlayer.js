@@ -18,8 +18,11 @@ export const playScale = (dataRef, beatIndex = 0) => {
   for (let i = 0; i < notes.length; i++) {
     const note = notes[i][beatIndex];
     const freq = NOTE_MAP[note];
-    const duration = tracks[i].noteDuration;
-    play(freq, duration);
+    const { noteDuration, isMuted, disabledBeats } = tracks[i];
+    const isBeatDisabled = disabledBeats.includes(beatIndex);
+    if (!isMuted && !isBeatDisabled) {
+      play(freq, noteDuration);
+    }
   }
 
   const delay = (1 / bpm) * 60 * 1000;

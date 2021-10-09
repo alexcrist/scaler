@@ -1,36 +1,86 @@
 .container {
   border: 2px solid;
-  padding: 10px;
   border-radius: 2px;
   margin-bottom: 10px;
   transition: height 300ms;
   transition: opacity 300ms;
-  height: 127px;
+  height: 157px;
   overflow: hidden;
   color: white;
 }
 
 .container.collapsed {
-  cursor: pointer;
+  height: 36px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.icons {
+  display: flex;
+}
+
+.icon {
+  margin-left: 5px;
+  padding: 0 5px;
+  margin-top: -5px;
+  padding-top: 4px;
+  margin-top: 4px;
+  border: 2px solid transparent;
   height: 18px;
 }
 
-.collapsed:hover {
+.icon:last-child {
+  padding-right: 10px
+}
+
+.icon:hover {
   opacity: 0.7;
+  cursor: pointer;
+}
+
+.isMuted {
+  border: 2px solid white;
+  border-radius: 2px;
+}
+
+.muteIcon {
+  width: 14px;
+  height: 14px;
+}
+
+.trashIcon {
+  width: 12px;
+  height: 12px;
 }
 
 .title {
   font-size: 15px;
+  flex: 1;
+  padding: 10px;
+  cursor: pointer;
+  user-select: none;
 }
 
 .title::before {
   display: inline-block;
   content: '^';
   margin-right: 10px;
-  transform: rotate(180deg);
-  transform-origin: 50% 45%;
+  transform-origin: 50% 40%;
   transition: all 300ms;
   font-size: 15px;
+  transform: rotate(180deg);
+}
+
+.title:hover::before {
+  transform: rotate(90deg) scale(1.2);
+  
+}
+
+.collapsed .title:hover::before {
+  transform: rotate(180deg);
 }
 
 .collapsed .title::before {
@@ -39,4 +89,11 @@
 
 .label:first-child {
   margin-top: 10px;
+}
+
+.label,
+.input {
+  margin-left: 10px;
+  margin-right: 10px;
+  width: calc(100% - 44px);
 }

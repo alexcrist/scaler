@@ -10,10 +10,11 @@
 .arm {
   position: absolute;
   width: 4px;
-  height: 301px;
   border-radius: 4px;
-  bottom: 20px;
-  background-color: #8338ec55;
+  bottom: 0;
+  top: 0;
+  background-color: #cccccccc;
+  opacity: 0.7;
   animation: slide 4s linear infinite;
   animation-delay: 0.1s;
   left: 18px;

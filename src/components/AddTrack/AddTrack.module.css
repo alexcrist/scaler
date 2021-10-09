@@ -1,0 +1,19 @@
+.createTrack {
+  border-radius: 2px;
+  border: 2px solid;
+  cursor: pointer;
+  transition: opacity 300ms;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.createTrack:hover {
+  opacity: 0.7;
+}
+
+.createTrackText {
+  color: white;
+  font-size: 15px;
+  text-align: center;
+}

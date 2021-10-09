@@ -1,0 +1,43 @@
+.buttons {
+  display: flex;
+  width: calc(100% - 8px);
+  margin: 10px auto 0;
+  transition: opacity 300ms;
+}
+
+.buttons.muted {
+  opacity: 0.4;
+}
+
+.button {
+  border-top: 2px solid;
+  border-left: 2px solid;
+  border-bottom: 2px solid;
+  padding: 10px 0;
+  flex: 1;
+  transition: opacity 300ms;
+  cursor: pointer;
+}
+
+.button:first-child {
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.button:last-child {
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border-right: 2px solid;
+}
+
+.button.disabled {
+  opacity: 0.5;
+}
+
+.button:hover {
+  opacity: 0.7;
+}
+
+.button.disabled:hover {
+  opacity: 0.8;
+}

@@ -1,29 +1,30 @@
 import _ from 'lodash';
 import { useState, useEffect, useRef, useMemo } from 'react';
+import { calculateNotes } from '../../util/noteCalculator';
+import { SCALES } from '../../constants/scales';
+import { playScale } from '../../util/scalePlayer';
 import getInitialTracks from '../../util/getInitialTracks';
 import styles from './App.module.css';
 import Chart from '../Chart/Chart.js';
 import TrackOptions from '../TrackOptions/TrackOptions.js';
-import { GRAY_1, OPACITY_3 } from '../../constants/colors';
 import LoopOptions from '../LoopOptions/LoopOptions';
-import Header from '../Header/Header';
+import Title from '../Title/Title';
 import TimelineArm from '../TimelineArm/TimelineArm';
-import { calculateNotes } from '../../util/noteCalculator';
-import { SCALES } from '../../constants/scales';
-import { playScale, stopScale } from '../../util/scalePlayer';
+import EnabledNotes from '../EnabledNotes/EnabledNotes';
+import AddTrack from '../AddTrack/AddTrack';
+import Play from '../Play/Play';
 
 const scale = SCALES[2];
 const lowNote = 'D3';
 
 const App = () => {
 
-  const [trackIndex, setTrackIndex] = useState(0);
   const [tracks, setTracks] = useState([]);
   const [bpm, setBpm] = useState(120);
   const [numBeats, setNumBeats] = useState(8);
   const [noteRange, setNoteRange] = useState(14);
   const [isPlaying, setIsPlaying] = useState(false);
-  
+
   // Calculate notes to play ===================================================
 
   const notes = useMemo(() => {
@@ -77,60 +78,66 @@ const App = () => {
 
   return (
     <div className={styles.app}>
-
-      <Header />
-
+      <Title />
       <div className={styles.row}>
+        <div className={styles.left}>
+          <div className={styles.chart}>
+            <Chart
+              tracks={tracks}
+              numBeats={numBeats}
+              notes={notes}
+            />
+            <TimelineArm
+              isPlaying={isPlaying}
+              bpm={bpm}
+              numBeats={numBeats}
+            />
+          </div>
+          {tracks.map((track, index) => (
+            <EnabledNotes
+              key={index}
+              numBeats={numBeats}
+              track={track}
+              setTrack={createSetTrack(index)}
+            />
+          ))}
 
-        <div className={styles.loopOptions}>
-          <LoopOptions
-            isPlaying={isPlaying}
-            bpm={bpm}
-            numBeats={numBeats}
-            noteRange={noteRange}
-            setIsPlaying={setIsPlaying}
-            setBpm={setBpm}
-            setNumBeats={setNumBeats}
-            setNoteRange={setNoteRange}
-          />
         </div>
 
-        <div className={styles.chart}>
-          <Chart
-            tracks={tracks}
-            trackIndex={trackIndex}
-            numBeats={numBeats}
-            notes={notes}
-          />
-          <TimelineArm
-            isPlaying={isPlaying}
-            bpm={bpm}
-            numBeats={numBeats}  
-          />
-        </div>
-
-        <div className={styles.trackOptions}>
+        <div className={styles.right}>
+          <div className={styles.buttons}>
+            <Play
+              isPlaying={isPlaying}
+              setIsPlaying={setIsPlaying}
+            />
+            <AddTrack
+              tracks={tracks}
+              setTracks={setTracks}
+            />
+          </div>
           {tracks.map((track, index) => (
             <TrackOptions
               key={index}
               index={index}
               track={track}
-              isSelected={trackIndex === index}
+              tracks={tracks}
               setTrack={createSetTrack(index)}
-              setTrackIndex={setTrackIndex}
+              setTracks={setTracks}
             />
           ))}
-          <div
-            className={styles.createTrack}
-            style={{
-              borderColor: GRAY_1,
-              backgroundColor: GRAY_1 + OPACITY_3,
-            }}
-          >
-            Add track
-          </div>
         </div>
       </div>
+
+      <LoopOptions
+        isPlaying={isPlaying}
+        bpm={bpm}
+        numBeats={numBeats}
+        noteRange={noteRange}
+        setIsPlaying={setIsPlaying}
+        setBpm={setBpm}
+        setNumBeats={setNumBeats}
+        setNoteRange={setNoteRange}
+      />
     </div>
   )
 }

@@ -1,9 +1,9 @@
-
-import { COLORS, OPACITY_1 } from '../../constants/colors';
+import { useState } from 'react';
+import { OPACITY_1 } from '../../constants/colors';
 import styles from './TrackOptions.module.css';
+import { FaTrash, FaVolumeMute, FaVolumeDown } from 'react-icons/fa';
 
-const Input = ({ index, ...props }) => {
-  const color = COLORS[index % COLORS.length];
+const Input = ({ color, index, ...props }) => {
   const borderColor = color;
   const style = { borderColor };
   return (
@@ -22,12 +22,7 @@ const Inputs = ({
   setTrack
 }) => {
 
-  const {
-    formula,
-    lowNote,
-    noteRange,
-    noteDuration
-  } = track;
+  const { formula, noteDuration } = track;
 
   const createAttributeSetter = (attribute) => (e) => {
     track[attribute] = e.target.value;
@@ -39,6 +34,7 @@ const Inputs = ({
 
       <label className={styles.label}>Formula</label>
       <Input
+        color={track.color}
         index={index}
         value={formula}
         onChange={createAttributeSetter('formula')}
@@ -46,6 +42,7 @@ const Inputs = ({
 
       <label className={styles.label}>Note duration (ms)</label>
       <Input
+        color={track.color}
         index={index}
         value={noteDuration}
         onChange={createAttributeSetter('noteDuration')}
@@ -55,46 +52,112 @@ const Inputs = ({
   );
 };
 
-const Options = ({
+const Icons = ({ 
+  isCollapsed,
   index,
   track,
-  isSelected,
+  tracks,
   setTrack,
-  setTrackIndex
+  setTracks,
+}) => {
+  if (isCollapsed) {
+    return null;
+  }
+
+  const onMute = () => {
+    setTrack({
+      ...track,
+      isMuted: !track.isMuted
+    });
+  };
+
+  const onDelete = () => {
+    if (tracks.length === 1) {
+      return;
+    }
+    tracks.splice(index, 1);
+    setTracks([...tracks]);
+  };
+
+  const muteClasses = [styles.icon];
+  if (track.isMuted) {
+    muteClasses.push(styles.isMuted);
+  }
+
+  const MuteIcon = track.isMuted ? FaVolumeMute : FaVolumeDown;
+
+  return (
+    <div className={styles.icons}>
+      <div
+        onClick={onMute}
+        className={muteClasses.join(' ')}
+      >
+        <MuteIcon className={styles.muteIcon} />
+      </div>
+      <div
+        onClick={onDelete}
+        className={styles.icon}
+      >
+        <FaTrash className={styles.trashIcon} />
+      </div>
+    </div>
+  );
+};
+
+const TrackOptions = ({
+  index,
+  track,
+  tracks,
+  setTracks,
+  setTrack
 }) => {
 
-  const color = COLORS[index % COLORS.length];
+  const [isCollapsed, setIsCollapsed] = useState(index !== 0);
+
+  const color = track.color;
   const borderColor = color;
   const backgroundColor = color + OPACITY_1;
   const containerStyle = { borderColor, backgroundColor };
   const containerClasses = [styles.container];
-  if (!isSelected) {
+  if (isCollapsed) {
     containerClasses.push(styles.collapsed)
   }
 
-  const onClickContainer = () => {
-    if (!isSelected) {
-      setTrackIndex(index);
-    }
+  const onClickContainer = (e) => {
+    setIsCollapsed(!isCollapsed);
   };
 
   return (
     <div
       style={containerStyle}
       className={containerClasses.join(' ')}
-      onClick={onClickContainer}
     >
-      <div className={styles.title}>Track {index + 1}</div>
-      {isSelected
-        ? <Inputs 
+      <div className={styles.header}>
+        <div
+          onClick={onClickContainer} 
+          className={styles.title}
+        >
+          Track {index + 1}
+        </div>
+        <Icons
+          index={index}
+          isCollapsed={isCollapsed}
+          track={track}
+          tracks={tracks}
+          setTrack={setTrack}
+          setTracks={setTracks}
+        />
+      </div>
+      {isCollapsed
+        ? null
+        : <Inputs
             track={track} 
             index={index} 
             setTrack={setTrack} 
           />
-        : null
       }
     </div>
   );
 };
 
-export default Options;
+export default TrackOptions;

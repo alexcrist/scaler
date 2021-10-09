@@ -1,20 +1,21 @@
-import styles from './Header.module.css';
+import styles from './Title.module.css';
 
-const Header = () => {
+const Title = () => {
   return (
     <div className={styles.container}>
       <div className={styles.text}>
         SCALER
       </div>
+      <div className={styles.line} />
       <a 
         className={styles.link} 
         href='https://github.com/alexcrist/scaler'
         target='_'  
       >
-        the code
+        see the code
       </a>
     </div>
   );
 };
 
-export default Header;
+export default Title;

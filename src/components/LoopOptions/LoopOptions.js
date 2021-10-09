@@ -1,77 +1,11 @@
-import { GRAY_1, OPACITY_3 } from '../../constants/colors';
+import { GRAY_1, OPACITY_1 } from '../../constants/colors';
 import styles from './LoopOptions.module.css';
 
-const Play = ({ isPlaying, setIsPlaying }) => {
-
-  const text = isPlaying ? 'Stop' : 'Play';
-  const playStyle = isPlaying
-    ? {
-      borderColor: '#980031',
-      backgroundColor: '#98003199'
-    }
-    : {
-      borderColor: '#489900',
-      backgroundColor: '#48990099'
-    };
-
-
-  const onPlay = () => {
-    setIsPlaying(!isPlaying);
-  };
-
-  return (
-    <div
-      onClick={onPlay}
-      className={styles.play}
-      style={playStyle}
-    >
-      <div>{text}</div>
-    </div>
-  );
-};
-
-const Container = ({ isPlyaing, setIsPlaying, children }) => {
-  const titleStyle = { color: GRAY_1 };
-  const containerStyle = { borderColor: GRAY_1 };
-  return (
-    <div>
-      <div className={styles.containerTopPlay}>
-        <div className={styles.containerTop} style={containerStyle}>
-          <div
-            className={styles.title}
-            style={titleStyle}
-          >
-            Loop options
-          </div>
-        </div>
-        <Play
-          isPlaying={isPlyaing}
-          setIsPlaying={setIsPlaying}
-        />
-      </div>
-      <div
-        className={styles.container}
-        style={containerStyle}
-      >
-        <div
-          className={styles.containerCorner}
-          style={containerStyle}
-        ></div>
-        {children}
-      </div>
-    </div>
-  );
-};
-
 const Input = (props) => {
-  const labelStyle = { color: GRAY_1 };
   const inputStyle = { borderColor: GRAY_1 };
   return (
-    <>
-      <label
-        className={styles.label}
-        style={labelStyle}
-      >
+    <div className={styles.inputGroup}>
+      <label className={styles.label}>
         {props.label}
       </label>
       <input
@@ -79,25 +13,28 @@ const Input = (props) => {
         style={inputStyle}
         {...props}
       />
-    </>
+    </div>
   );
 };
 
 const LoopOptions = ({
-  isPlaying,
   bpm,
   numBeats,
   noteRange,
-  setIsPlaying,
   setBpm,
   setNumBeats,
   setNoteRange
 }) => {
 
+  const containerStyle = {
+    backgroundColor: GRAY_1 + OPACITY_1,
+    borderColor: GRAY_1,
+  };
+
   return (
-    <Container
-      isPlyaing={isPlaying}
-      setIsPlaying={setIsPlaying}
+    <div
+      className={styles.container}
+      style={containerStyle}
     >
       <Input
         label='Tempo (bpm)'
@@ -129,7 +66,7 @@ const LoopOptions = ({
         onChange={() => null}
         disabled
       />
-    </Container>
+    </div>
   );
 };
 

@@ -1,6 +1,4 @@
 .container {
-  background-color: #1A5E6399;
-  border: 2px solid #1A5E6366;
   padding: 10px;
   margin-bottom: 20px;
   border-radius: 2px;
@@ -11,14 +9,25 @@
 
 .text {
   letter-spacing: 4px;
-  color: white;
+  color: #666;
   font-style: italic;
   font-size: 18px;
 }
 
 .link {
-  color: white;
+  color: #666;
   font-size: 13px;
   text-decoration: none;
   font-style: italic;
+  transition: opacity 300ms;
+}
+
+.link:hover {
+  opacity: 0.7;
+}
+
+.line {
+  flex: 1;
+  border-bottom: 2px solid #66666666;
+  margin: 0 20px;
 }

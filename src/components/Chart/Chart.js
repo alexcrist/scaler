@@ -1,5 +1,5 @@
+import _ from 'lodash';
 import { LineChart, Line, Tooltip, YAxis, ResponsiveContainer, ReferenceLine } from 'recharts';
-import { COLORS, GRAY_1, OPACITY_1, OPACITY_2, OPACITY_3 } from '../../constants/colors';
 import formulaToData from '../../util/formulaToData';
 import styles from './Chart.module.css';
 
@@ -7,7 +7,6 @@ const H = 300;
 
 const Chart = ({
   tracks,
-  trackIndex,
   numBeats,
   notes,
 }) => {
@@ -50,7 +49,9 @@ const Chart = ({
   }
 
   const yLines = [];
-  for (let i = -3; i <= 3; i++) {
+  const yMin = Math.floor(_(yValuesArray).flatten().min());
+  const yMax = Math.ceil(_(yValuesArray).flatten().max());
+  for (let i = yMin; i <= yMax; i++) {
     yLines.push(
       <ReferenceLine
         key={`y-line-${i}`}
@@ -59,12 +60,6 @@ const Chart = ({
       />
     );
   }
-
-  const getColor = (i) => {
-    const color = COLORS[i % COLORS.length];
-    const opacity = i === trackIndex ? '' : OPACITY_2;
-    return color + opacity;
-  };
 
   const formatter = (_, __,  properties) => {
     const { dataKey, payload: { i } } = properties; 
@@ -81,16 +76,15 @@ const Chart = ({
         >
           {xLines}
           {yLines}
-          {tracks.map((_, i) => (
+          {tracks.map((track, i) => (
             <Line
               key={`line-${i}`}
               type='monotone'
               dataKey={`Track ${i + 1}`}
-              stroke={getColor(i)}
+              stroke={track.color}
+              opacity={track.isMuted ? 0.4 : 1}
               dot={false}
               strokeWidth={2}
-              animationDuration={600}
-              isAnimationActive={false}
             />
           ))}
           <Tooltip
