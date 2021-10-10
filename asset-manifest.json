@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/scaler/static/css/main.3edc79a8.chunk.css",
+    "main.css": "/scaler/static/css/main.8a593162.chunk.css",
     "main.js": "/scaler/static/js/main.df8ceae5.chunk.js",
     "main.js.map": "/scaler/static/js/main.df8ceae5.chunk.js.map",
     "runtime-main.js": "/scaler/static/js/runtime-main.50e5a787.js",
@@ -8,13 +8,13 @@
     "static/js/2.89072829.chunk.js": "/scaler/static/js/2.89072829.chunk.js",
     "static/js/2.89072829.chunk.js.map": "/scaler/static/js/2.89072829.chunk.js.map",
     "index.html": "/scaler/index.html",
-    "static/css/main.3edc79a8.chunk.css.map": "/scaler/static/css/main.3edc79a8.chunk.css.map",
+    "static/css/main.8a593162.chunk.css.map": "/scaler/static/css/main.8a593162.chunk.css.map",
     "static/js/2.89072829.chunk.js.LICENSE.txt": "/scaler/static/js/2.89072829.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.50e5a787.js",
     "static/js/2.89072829.chunk.js",
-    "static/css/main.3edc79a8.chunk.css",
+    "static/css/main.8a593162.chunk.css",
     "static/js/main.df8ceae5.chunk.js"
   ]
 }
