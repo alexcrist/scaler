@@ -3,6 +3,10 @@
   font-weight: bold;
 }
 
+body {
+  margin: 0;
+}
+
 path {
   transition: all 300ms;
 }
