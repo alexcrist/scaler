@@ -1,10 +1,10 @@
-# [Scaler](https://alexcrist.github.io/scaler/)
+# 📼 Scaler
 
 > Scaler is a web application that allows you to play notes according to mathematical formulas like `y = sin(x)`. 
 
 https://alexcrist.github.io/scaler/
 
-## Features
+## 🪀 Features
 
 * Play notes according to mathematical formulas
 * Create and loop multiple formulas
@@ -17,7 +17,7 @@ https://alexcrist.github.io/scaler/
   * Pitch range
   * Scale
 
-## Software developement
+## 💻 Software developement
 
 To run the project locally, you'll need Node (v14.17.4) and NPM (v7.20.6).
 
@@ -27,7 +27,7 @@ From there, you can run the project by starting the developement server with `np
 
 The project can be automatically deployed to GitHub with `npm run deploy`.
 
-## Possible improvements
+## 🔭 Future improvements
 
 * Add more scales
 * Allow export to MIDI
