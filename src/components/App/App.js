@@ -14,16 +14,15 @@ import EnabledNotes from '../EnabledNotes/EnabledNotes';
 import AddTrack from '../AddTrack/AddTrack';
 import Play from '../Play/Play';
 
-const scale = SCALES[2];
-const lowNote = 'D3';
-
 const App = () => {
 
   const [tracks, setTracks] = useState([]);
-  const [bpm, setBpm] = useState(120);
-  const [numBeats, setNumBeats] = useState(8);
+  const [bpm, setBpm] = useState(60);
+  const [numBeats, setNumBeats] = useState(16);
   const [noteRange, setNoteRange] = useState(14);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [scale, setScale] = useState(SCALES[3]);
+  const [lowNote, setLowNote] = useState('E3');
 
   // Calculate notes to play ===================================================
 
@@ -35,7 +34,7 @@ const App = () => {
       scale,
       lowNote
     );
-  }, [tracks, numBeats, noteRange]);
+  }, [tracks, numBeats, noteRange, scale, lowNote]);
 
   // Ref for scale player data =================================================
 
@@ -78,62 +77,65 @@ const App = () => {
 
   return (
     <div className={styles.app}>
-      <Title />
-      <div className={styles.row}>
-        <div className={styles.left}>
-          <div className={styles.chart}>
-            <Chart
-              tracks={tracks}
-              numBeats={numBeats}
-              notes={notes}
-            />
-            <TimelineArm
-              isPlaying={isPlaying}
-              bpm={bpm}
-              numBeats={numBeats}
-            />
-          </div>
-          {tracks.map((track, index) => (
-            <EnabledNotes
-              key={index}
-              numBeats={numBeats}
-              track={track}
-              setTrack={createSetTrack(index)}
-            />
-          ))}
+      <div>
+        <Title />
+        <div className={styles.row}>
+          <div className={styles.left}>
+            <div className={styles.chart}>
+              <Chart
+                tracks={tracks}
+                numBeats={numBeats}
+                notes={notes}
+              />
+              <TimelineArm
+                isPlaying={isPlaying}
+                bpm={bpm}
+                numBeats={numBeats}
+              />
+            </div>
+            {tracks.map((track, index) => (
+              <EnabledNotes
+                key={index}
+                numBeats={numBeats}
+                track={track}
+                setTrack={createSetTrack(index)}
+              />
+            ))}
 
-        </div>
-
-        <div className={styles.right}>
-          <div className={styles.buttons}>
-            <Play
-              isPlaying={isPlaying}
-              setIsPlaying={setIsPlaying}
-            />
-            <AddTrack
-              tracks={tracks}
-              setTracks={setTracks}
-            />
           </div>
-          {tracks.map((track, index) => (
-            <TrackOptions
-              key={index}
-              index={index}
-              track={track}
-              tracks={tracks}
-              setTrack={createSetTrack(index)}
-              setTracks={setTracks}
-            />
-          ))}
+
+          <div className={styles.right}>
+            <div className={styles.buttons}>
+              <Play
+                isPlaying={isPlaying}
+                setIsPlaying={setIsPlaying}
+              />
+              <AddTrack
+                tracks={tracks}
+                setTracks={setTracks}
+              />
+            </div>
+            {tracks.map((track, index) => (
+              <TrackOptions
+                key={index}
+                index={index}
+                track={track}
+                tracks={tracks}
+                setTrack={createSetTrack(index)}
+                setTracks={setTracks}
+              />
+            ))}
+          </div>
         </div>
       </div>
-
       <LoopOptions
-        isPlaying={isPlaying}
+        scale={scale}
+        lowNote={lowNote}
         bpm={bpm}
         numBeats={numBeats}
         noteRange={noteRange}
-        setIsPlaying={setIsPlaying}
+        setScale={setScale}
+        setLowNote={setLowNote}
         setBpm={setBpm}
         setNumBeats={setNumBeats}
         setNoteRange={setNoteRange}

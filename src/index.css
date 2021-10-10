@@ -25,3 +25,18 @@ input:focus-visible {
   border-color: black !important;
   outline: none;
 }
+
+select {
+  padding: 4px 10px;
+  border-radius: 2px;
+  border: 2px solid;
+  width: calc(100% - 24px);
+  width: 100%;
+  outline: none;
+}
+
+select:focus-visible {
+  border-color: black !important;
+  outline: none;
+}
+

@@ -12,7 +12,7 @@ const Chart = ({
 }) => {
 
   const xValues = [];
-  const numXValues = numBeats * 100;
+  const numXValues = numBeats * 10;
   for (let i = 0; i < numXValues + 1; i++) {
     xValues.push(i * (2 * Math.PI) / numXValues);
   }

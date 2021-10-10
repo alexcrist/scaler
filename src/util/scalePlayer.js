@@ -25,7 +25,8 @@ export const playScale = (dataRef, beatIndex = 0) => {
     }
   }
 
-  const delay = (1 / bpm) * 60 * 1000;
+  // Multiply BPM times four to represent quarter
+  const delay = (1 / (bpm * 4)) * 60 * 1000;
   const newBeatIndex = (beatIndex + 1) % numBeats;
   setTimeout(() => playScale(dataRef, newBeatIndex), delay);
 };

@@ -41,7 +41,9 @@ const EnabledNotes = ({ numBeats, track, setTrack }) => {
         onClick={onClick}
         style={buttonStyle}
         className={buttonClasses.join(' ')}
-      />
+      >
+        {i + 1}
+      </div>
     );
   }
 
