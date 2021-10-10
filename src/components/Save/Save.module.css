@@ -1,0 +1,25 @@
+.save {
+  border: 2px solid;
+  border-radius: 2px;
+  padding: 5px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0;
+  cursor: pointer;
+  transition: opacity 300ms;
+}
+
+.save:hover {
+  opacity: 0.7;
+}
+
+.saveIcon {
+  color: white;
+}
+
+.saveIcon > * {
+  width: 15px;
+  height: 15px;
+  margin-bottom: -3px
+}

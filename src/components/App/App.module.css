@@ -37,11 +37,11 @@
 }
 
 .buttons > *:first-child {
-  margin-right: 5px;
+  margin-right: 10px;
 }
 
 .buttons > *:last-child {
-  margin-left: 5px;
+  margin-left: 10px;
 }
 
 @media screen and (max-width: 450px) {

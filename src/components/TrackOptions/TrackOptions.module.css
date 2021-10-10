@@ -2,8 +2,7 @@
   border: 2px solid;
   border-radius: 2px;
   margin-bottom: 10px;
-  transition: height 300ms;
-  transition: opacity 300ms;
+  transition: all 300ms;
   height: 157px;
   overflow: hidden;
   color: white;

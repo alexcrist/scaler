@@ -20,7 +20,7 @@ export const playScale = (dataRef, beatIndex = 0) => {
     const freq = NOTE_MAP[note];
     const { noteDuration, isMuted, disabledBeats } = tracks[i];
     const isBeatDisabled = disabledBeats.includes(beatIndex);
-    if (!isMuted && !isBeatDisabled) {
+    if (!isMuted && !isBeatDisabled && noteDuration) {
       play(freq, noteDuration);
     }
   }
