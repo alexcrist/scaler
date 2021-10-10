@@ -4,6 +4,7 @@ import formulaToData from '../../util/formulaToData';
 import styles from './Chart.module.css';
 
 const H = 300;
+const dataDensity = 10; 
 
 const Chart = ({
   tracks,
@@ -12,7 +13,7 @@ const Chart = ({
 }) => {
 
   const xValues = [];
-  const numXValues = numBeats * 10;
+  const numXValues = numBeats * dataDensity;
   for (let i = 0; i < numXValues + 1; i++) {
     xValues.push(i * (2 * Math.PI) / numXValues);
   }
@@ -64,7 +65,7 @@ const Chart = ({
   const formatter = (_, __,  properties) => {
     const { dataKey, payload: { i } } = properties; 
     const trackIndex = Number(dataKey[dataKey.length - 1]) - 1;
-    const beatIndex = Math.round(i / 100);
+    const beatIndex = Math.round(i / dataDensity);
     return notes[trackIndex][beatIndex];
   };
 
@@ -89,7 +90,7 @@ const Chart = ({
           ))}
           <Tooltip
             formatter={formatter}
-            labelFormatter={(label) => Math.round(label / 100)}
+            labelFormatter={(label) => Math.floor(label / dataDensity) + 1}
           />
           <YAxis domain={['dataMin', 'dataMax']} hide={true} />
         </LineChart>
