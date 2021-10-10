@@ -88,7 +88,7 @@ const App = () => {
   // Save to local storage =====================================================
 
   useEffect(() => {
-    window.history.pushState({}, '', window.location.origin);
+    window.history.pushState({}, '', window.location.origin + window.location.pathname);
     saveLocal({ bpm, numBeats, noteRange, scale, lowNote, tracks });
   }, [bpm, numBeats, noteRange, scale, lowNote, tracks]);
 
@@ -96,7 +96,7 @@ const App = () => {
 
   const onSave = async () => {
     const hash = toHash({ bpm, numBeats, noteRange, scale, lowNote, tracks });
-    const url = window.location.origin + '?d=' + hash;
+    const url = window.location.origin + window.location.pathname + '?d=' + hash;
 
     try {
       await navigator.clipboard.writeText(url);
