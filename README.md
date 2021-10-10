@@ -2,6 +2,8 @@
 
 > Scaler is a web application that allows you to play notes according to mathematical formulas like `y = sin(x)`. 
 
+https://alexcrist.github.io/scaler/
+
 ## Features
 
 * Play notes according to mathematical formulas
