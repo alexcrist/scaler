@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/scaler/static/css/main.695b391d.chunk.css",
-    "main.js": "/scaler/static/js/main.7dde74a7.chunk.js",
-    "main.js.map": "/scaler/static/js/main.7dde74a7.chunk.js.map",
+    "main.css": "/scaler/static/css/main.b2aaf0c5.chunk.css",
+    "main.js": "/scaler/static/js/main.fbf09591.chunk.js",
+    "main.js.map": "/scaler/static/js/main.fbf09591.chunk.js.map",
     "runtime-main.js": "/scaler/static/js/runtime-main.50e5a787.js",
     "runtime-main.js.map": "/scaler/static/js/runtime-main.50e5a787.js.map",
-    "static/js/2.c6830758.chunk.js": "/scaler/static/js/2.c6830758.chunk.js",
-    "static/js/2.c6830758.chunk.js.map": "/scaler/static/js/2.c6830758.chunk.js.map",
+    "static/js/2.4c691dc5.chunk.js": "/scaler/static/js/2.4c691dc5.chunk.js",
+    "static/js/2.4c691dc5.chunk.js.map": "/scaler/static/js/2.4c691dc5.chunk.js.map",
     "index.html": "/scaler/index.html",
-    "static/css/main.695b391d.chunk.css.map": "/scaler/static/css/main.695b391d.chunk.css.map",
-    "static/js/2.c6830758.chunk.js.LICENSE.txt": "/scaler/static/js/2.c6830758.chunk.js.LICENSE.txt"
+    "static/css/main.b2aaf0c5.chunk.css.map": "/scaler/static/css/main.b2aaf0c5.chunk.css.map",
+    "static/js/2.4c691dc5.chunk.js.LICENSE.txt": "/scaler/static/js/2.4c691dc5.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.50e5a787.js",
-    "static/js/2.c6830758.chunk.js",
-    "static/css/main.695b391d.chunk.css",
-    "static/js/main.7dde74a7.chunk.js"
+    "static/js/2.4c691dc5.chunk.js",
+    "static/css/main.b2aaf0c5.chunk.css",
+    "static/js/main.fbf09591.chunk.js"
   ]
 }
