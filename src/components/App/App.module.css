@@ -32,12 +32,12 @@
   margin-bottom: 30px;
 }
 
-.buttons > *:first-child {
+.buttons > * {
   margin-right: 10px;
 }
 
 .buttons > *:last-child {
-  margin-left: 10px;
+  margin-right: 0;
 }
 
 @media screen and (max-width: 450px) {

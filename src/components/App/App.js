@@ -1,15 +1,16 @@
 import _ from 'lodash';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { SCALES } from '../../constants/scales';
-import { loadInitialState } from '../../util/stateLoader';
-import { toHash } from '../../util/stateHasher';
-import { calculateNotes } from '../../util/noteCalculator';
 import { saveLocal } from '../../util/localStorage';
+import { calculateNotes } from '../../util/noteCalculator';
 import { playScale } from '../../util/scalePlayer';
+import { toHash } from '../../util/stateHasher';
+import { loadInitialState } from '../../util/stateLoader';
 import AddTrack from '../AddTrack/AddTrack';
 import Chart from '../Chart/Chart.js';
 import EnabledNotes from '../EnabledNotes/EnabledNotes';
 import LoopOptions from '../LoopOptions/LoopOptions';
+import More from '../More/More';
 import Play from '../Play/Play';
 import Save from '../Save/Save';
 import TimelineArm from '../TimelineArm/TimelineArm';
@@ -157,6 +158,11 @@ const App = () => {
                 setTracks={setTracks}
               />
               <Save onSave={onSave} />
+              <More
+                bpm={bpm}
+                tracks={tracks}
+                notes={notes}
+              />
             </div>
             {tracks.map((track, index) => (
               <TrackOptions
