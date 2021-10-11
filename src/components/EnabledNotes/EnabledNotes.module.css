@@ -20,6 +20,7 @@
   color: white;
   text-align: center;
   font-size: 13px;
+  overflow: hidden;
 }
 
 .button:first-child {

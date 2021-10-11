@@ -2,22 +2,21 @@ const AudioContext = window.AudioContext || window.webkitAudioContext;
 const context = new AudioContext();
 
 export const play = (freq, noteDuration) => {
-  if (typeof freq !== 'number' || isNaN(freq) || !freq) {
+  freq = Number(freq);
+  noteDuration = Number(noteDuration);
+  if (isNaN(freq) || freq < 0) {
     return;
   }
-  if (
-    noteDuration === undefined ||
-    isNaN(noteDuration) ||
-    noteDuration < 1
-  ) {
-    noteDuration = 85;
+  if (isNaN(noteDuration) || noteDuration < 1) {
+    return;
   }
+
   const masterVolume = context.createGain();
-  masterVolume.gain.setValueCurveAtTime(new Float32Array([0, 0.8, 1, 0.3, 0].map(v => v * 0.05)), context.currentTime, noteDuration / 1000);
   masterVolume.connect(context.destination);
+  masterVolume.gain.setValueCurveAtTime(new Float32Array([0, 0.8, 1, 0.3, 0].map(v => v * 0.05)), context.currentTime, noteDuration / 1000);
   const oscillator = context.createOscillator();
   oscillator.connect(masterVolume);
   oscillator.frequency.setValueAtTime(freq, 0);
-  oscillator.start(0);
-  setTimeout(() => oscillator.stop(), noteDuration);
+  oscillator.start(context.currentTime);
+  oscillator.stop(context.currentTime + noteDuration / 1000);
 };
