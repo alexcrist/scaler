@@ -30,6 +30,5 @@ The project can be automatically deployed to GitHub with `npm run deploy`.
 
 ## 🔭 Future improvements
 
-* Fix audio problems on mobile
-* Make notes not scale to min / max points in formulas
+* Improve audio performance on mobile (less reliance on `setTimeout`)
 * Add more scales
