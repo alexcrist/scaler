@@ -30,8 +30,10 @@ The project can be automatically deployed to GitHub with `npm run deploy`.
 ## 🔭 Future improvements
 
 * Test on more browsers
+  * Firefox
   * iOS Safari
-  * Firefox (Android?)
+  * Android Chrome
+  * Android Firefox
 * Allow formulas with implicit multiplication like `sin(2x)`
 * Formula validation (error, bad formula)
 * Handle infinity
