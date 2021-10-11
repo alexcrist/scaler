@@ -2,14 +2,19 @@ import { useState } from 'react';
 import { OPACITY_1 } from '../../constants/colors';
 import styles from './TrackOptions.module.css';
 import { FaTrash, FaVolumeMute, FaVolumeDown } from 'react-icons/fa';
+import formulaToData from '../../util/formulaToData';
 
-const Input = ({ color, index, ...props }) => {
+const Input = ({ color, index, isError, ...props }) => {
   const borderColor = color;
   const style = { borderColor };
+  const classes = [styles.input];
+  if (isError) {
+    classes.push(styles.inputError);
+  }
   return (
     <input
       index={index}
-      className={styles.input}
+      className={classes.join(' ')}
       style={style}
       {...props}
     />
@@ -24,6 +29,13 @@ const Inputs = ({
 
   const { formula, noteDuration } = track;
 
+  let isFormulaValid = true;
+  try {
+    formulaToData(formula, [0, Math.PI]);
+  } catch (e) {
+    isFormulaValid = false;
+  }
+
   const createAttributeSetter = (attribute) => (e) => {
     track[attribute] = e.target.value;
     setTrack(track);
@@ -34,6 +46,7 @@ const Inputs = ({
 
       <label className={styles.label}>Formula</label>
       <Input
+        isError={!isFormulaValid}
         color={track.color}
         index={index}
         value={formula}

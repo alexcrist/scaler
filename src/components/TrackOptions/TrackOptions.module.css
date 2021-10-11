@@ -96,3 +96,11 @@
   margin-right: 10px;
   width: calc(100% - 44px);
 }
+
+.input {
+  transition: all 300ms;
+}
+
+.inputError {
+  background-color: #edc5c5;
+}

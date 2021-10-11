@@ -19,7 +19,7 @@ const defaultData = {
     },
     {
       color: COLORS[1],
-      formula: 'y = (1 / (x + 0.5)) * cos(4 * x) - 2',
+      formula: 'y = (1 / (x + 0.5)) * cos(4x) - 2',
       noteDuration: 90,
       disabledBeats: [0, 2, 5, 6, 10, 12, 13],
       isMuted: false

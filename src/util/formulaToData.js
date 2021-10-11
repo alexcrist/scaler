@@ -1,4 +1,4 @@
-import { Parser } from 'expr-eval';
+import { evaluate } from 'mathjs';
 
 const formulaToData = (formula, xValues) => {
   formula = formula.replace(/\s+/g, '');
@@ -12,7 +12,7 @@ const formulaToData = (formula, xValues) => {
   let yValues = [];
   for (const x of xValues) {
     try {
-      const y = Parser.evaluate(formula, { x });
+      const y = evaluate(formula, { x });
       yValues.push(y);
     } catch (e) {
       throw Error('Formula evaluation error: ' + formula);
@@ -29,6 +29,13 @@ const formulaToData = (formula, xValues) => {
     }
     return y;
   });
+
+  // Handle bad values (functions)
+  for (const y of yValues)  {
+    if (typeof y !== 'number' || isNaN(y)) {
+      throw Error('Formula evaluation error: ' + formula);
+    }
+  }
 
   return yValues;
 };
