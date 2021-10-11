@@ -29,6 +29,7 @@ The project can be automatically deployed to GitHub with `npm run deploy`.
 
 ## 🔭 Future improvements
 
+* Improve clarity of enabled/disabled notes hover state
 * Fix audio problems on mobile
 * Make notes not scale to min / max points in formulas
 * Add more scales
