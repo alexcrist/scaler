@@ -57,6 +57,5 @@ export const toMidiString = ({
 
   const writer = new MidiWriter.Writer(midiTracks);
   const midiString = writer.dataUri();
-  console.log('midiString', midiString);
   return midiString;
 };

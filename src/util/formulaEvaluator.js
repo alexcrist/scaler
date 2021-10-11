@@ -40,7 +40,7 @@ export const formulaToData = (formula, xValues) => {
   // Handle bad values (functions)
   for (const y of yValues)  {
     if (typeof y !== 'number' || isNaN(y)) {
-      console.log('yValues:', yValues);
+      console.error('Error in y-values:', yValues);
       throw Error('Formula produced invalid values: ' + formula);
     }
   }

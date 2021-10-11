@@ -54,8 +54,6 @@ const Chart = ({
     );
   }
 
-  console.log(yValuesArray);
-
   const yLines = [];
   const yMin = Math.floor(_(yValuesArray).flatten().min());
   const yMax = Math.ceil(_(yValuesArray).flatten().max());
