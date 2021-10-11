@@ -29,11 +29,7 @@ The project can be automatically deployed to GitHub with `npm run deploy`.
 
 ## 🔭 Future improvements
 
-* Test on more browsers
-  * Firefox
-  * iOS Safari
-  * Android Chrome
-  * Android Firefox
+* Fix audio problems on mobile
 * Make notes not scale to min / max points in formulas
 * Add more scales
 * Allow export to MIDI
