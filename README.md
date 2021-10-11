@@ -37,4 +37,3 @@ The project can be automatically deployed to GitHub with `npm run deploy`.
 * Handle infinity
 * Add more scales
 * Allow export to MIDI
-* Refactor code to use a re-usable Button component
