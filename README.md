@@ -33,4 +33,3 @@ The project can be automatically deployed to GitHub with `npm run deploy`.
 * Fix audio problems on mobile
 * Make notes not scale to min / max points in formulas
 * Add more scales
-* Allow export to MIDI
