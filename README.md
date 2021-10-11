@@ -34,8 +34,6 @@ The project can be automatically deployed to GitHub with `npm run deploy`.
   * iOS Safari
   * Android Chrome
   * Android Firefox
-* Allow formulas with implicit multiplication like `sin(2x)`
-* Formula validation (error, bad formula)
 * Make notes not scale to min / max points in formulas
 * Add more scales
 * Allow export to MIDI
