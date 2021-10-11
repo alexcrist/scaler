@@ -35,5 +35,6 @@ The project can be automatically deployed to GitHub with `npm run deploy`.
 * Allow formulas with implicit multiplication like `sin(2x)`
 * Formula validation (error, bad formula)
 * Handle infinity
+* Make notes not scale to min / max points in formulas
 * Add more scales
 * Allow export to MIDI
