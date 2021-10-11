@@ -10,6 +10,7 @@ https://alexcrist.github.io/scaler/
 * Create and loop multiple formulas
 * Enable / disable particular beats
 * Save and share creations
+* Export to MIDI
 * Allows modification of:
   * Note durations
   * Tempo
