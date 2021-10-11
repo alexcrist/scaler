@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import formulaToData from './formulaToData';
+import { formulaToData } from './formulaEvaluator';
 
 export const calculateNotes = (
   tracks,
@@ -17,7 +17,8 @@ export const calculateNotes = (
 
   const yValuesArray = tracks.map(({ formula }) => {
     try {
-      return formulaToData(formula, xValues);
+      const data = formulaToData(formula, xValues);
+      return data.yValues;
     } catch (e) {
       return [];
     }

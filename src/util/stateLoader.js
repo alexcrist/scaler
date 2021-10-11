@@ -1,7 +1,7 @@
 import { COLORS } from '../constants/colors';
 import { SCALES } from '../constants/scales';
-import { fromHash } from './hasher';
-import { loadLocal } from './saveLocal';
+import { fromHash } from './stateHasher';
+import { loadLocal } from './localStorage';
 
 const defaultData = {
   bpm: 60,
@@ -34,7 +34,7 @@ const defaultData = {
   ]
 };
 
-const getInitialData = () => {
+export const loadInitialState = () => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   let data = urlParams.get('d');
@@ -47,5 +47,3 @@ const getInitialData = () => {
   }
   return defaultData;
 };
-
-export default getInitialData;

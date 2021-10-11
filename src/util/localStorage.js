@@ -1,17 +1,16 @@
-import { fromHash, toHash } from './hasher';
+import { fromHash, toHash } from './stateHasher';
 
-const key = 'd';
+const KEY = 'd';
 
 export const loadLocal = () => {
-  const hash = localStorage.getItem(key);
+  const hash = localStorage.getItem(KEY);
   if (hash === null) {
     return null;
   }
-
   return fromHash(hash);
 };
 
 export const saveLocal = (data) => {
   const hash = toHash(data);
-  localStorage.setItem(key, hash);
+  localStorage.setItem(KEY, hash);
 };

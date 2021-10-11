@@ -1,10 +1,10 @@
 import _ from 'lodash';
-import { LineChart, Line, Tooltip, YAxis, ResponsiveContainer, ReferenceLine } from 'recharts';
-import formulaToData from '../../util/formulaToData';
+import { Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, YAxis } from 'recharts';
+import { formulaToData } from '../../util/formulaEvaluator';
 import styles from './Chart.module.css';
 
 const H = 300;
-const dataDensity = 10; 
+const dataResolution = 20; 
 
 const Chart = ({
   tracks,
@@ -13,15 +13,20 @@ const Chart = ({
 }) => {
 
   const xValues = [];
-  const numXValues = numBeats * dataDensity;
+  const numXValues = numBeats * dataResolution;
   for (let i = 0; i < numXValues + 1; i++) {
     xValues.push(i * (2 * Math.PI) / numXValues);
   }
 
+  let wasCapped = false;
+  let cap = 0;
   const yValuesArray = tracks
     .map((track) => {
       try {
-        return formulaToData(track.formula, xValues);
+        const data = formulaToData(track.formula, xValues);
+        wasCapped = wasCapped || data.wasCapped;
+        cap = data.cap;
+        return data.yValues;
       } catch (e) {
         return [];
       }
@@ -49,10 +54,14 @@ const Chart = ({
     );
   }
 
+  console.log(yValuesArray);
+
   const yLines = [];
   const yMin = Math.floor(_(yValuesArray).flatten().min());
   const yMax = Math.ceil(_(yValuesArray).flatten().max());
-  for (let i = yMin; i <= yMax; i++) {
+  const range = yMax - yMin;
+  const inc = Math.max(1, 10 ** Math.floor(Math.log10(range - 1)));
+  for (let i = yMin; i <= yMax; i += inc) {
     yLines.push(
       <ReferenceLine
         key={`y-line-${i}`}
@@ -65,7 +74,7 @@ const Chart = ({
   const formatter = (_, __,  properties) => {
     const { dataKey, payload: { i } } = properties; 
     const trackIndex = Number(dataKey[dataKey.length - 1]) - 1;
-    const beatIndex = Math.round(i / dataDensity);
+    const beatIndex = Math.round(i / dataResolution);
     return notes[trackIndex][beatIndex];
   };
 
@@ -90,11 +99,15 @@ const Chart = ({
           ))}
           <Tooltip
             formatter={formatter}
-            labelFormatter={(label) => Math.floor(label / dataDensity) + 1}
+            labelFormatter={(label) => Math.floor(label / dataResolution) + 1}
           />
           <YAxis domain={['dataMin', 'dataMax']} hide={true} />
         </LineChart>
       </ResponsiveContainer>
+      {wasCapped
+        ? <div className={styles.cap}>* y-values capped at ±{cap}</div>
+        : null
+      }
     </div>
   );
 };

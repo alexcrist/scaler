@@ -1,7 +1,7 @@
 import LZString from 'lz-string';
 
-export const toHash = (object) => {
-  const str = JSON.stringify(object);
+export const toHash = (stateObject) => {
+  const str = JSON.stringify(stateObject);
   return LZString.compressToEncodedURIComponent(str);
 };
 

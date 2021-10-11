@@ -1,21 +1,21 @@
 import _ from 'lodash';
-import { useState, useEffect, useRef, useMemo } from 'react';
-import { calculateNotes } from '../../util/noteCalculator';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { SCALES } from '../../constants/scales';
+import { loadInitialState } from '../../util/stateLoader';
+import { toHash } from '../../util/stateHasher';
+import { calculateNotes } from '../../util/noteCalculator';
+import { saveLocal } from '../../util/localStorage';
 import { playScale } from '../../util/scalePlayer';
-import getInitialData from '../../util/getInitialData';
-import styles from './App.module.css';
-import Chart from '../Chart/Chart.js';
-import TrackOptions from '../TrackOptions/TrackOptions.js';
-import LoopOptions from '../LoopOptions/LoopOptions';
-import Title from '../Title/Title';
-import TimelineArm from '../TimelineArm/TimelineArm';
-import EnabledNotes from '../EnabledNotes/EnabledNotes';
 import AddTrack from '../AddTrack/AddTrack';
+import Chart from '../Chart/Chart.js';
+import EnabledNotes from '../EnabledNotes/EnabledNotes';
+import LoopOptions from '../LoopOptions/LoopOptions';
 import Play from '../Play/Play';
-import { saveLocal } from '../../util/saveLocal';
 import Save from '../Save/Save';
-import { toHash } from '../../util/hasher';
+import TimelineArm from '../TimelineArm/TimelineArm';
+import Title from '../Title/Title';
+import TrackOptions from '../TrackOptions/TrackOptions.js';
+import styles from './App.module.css';
 
 const App = () => {
 
@@ -68,7 +68,7 @@ const App = () => {
       noteRange,
       scale,
       lowNote
-    } = getInitialData();
+    } = loadInitialState();
     setTracks(tracks);
     setBpm(bpm);
     setNumBeats(numBeats);
@@ -92,12 +92,11 @@ const App = () => {
     saveLocal({ bpm, numBeats, noteRange, scale, lowNote, tracks });
   }, [bpm, numBeats, noteRange, scale, lowNote, tracks]);
 
-  // Page content ==============================================================
+  // Event handlers ============================================================
 
   const onSave = async () => {
     const hash = toHash({ bpm, numBeats, noteRange, scale, lowNote, tracks });
     const url = window.location.origin + window.location.pathname + '?d=' + hash;
-
     try {
       await navigator.clipboard.writeText(url);
       alert('A link to your work has been copied to your clipboard.');
@@ -112,11 +111,17 @@ const App = () => {
     setTracks(newTracks);
   };
 
+  // Page content ==============================================================
+
   return (
     <div className={styles.app}>
       <div>
+
         <Title />
+
         <div className={styles.row}>
+
+          {/* Left section ================================================= */}
           <div className={styles.left}>
             <div className={styles.chart}>
               <Chart
@@ -138,9 +143,9 @@ const App = () => {
                 setTrack={createSetTrack(index)}
               />
             ))}
-
           </div>
 
+          {/* Right section ================================================ */}
           <div className={styles.right}>
             <div className={styles.buttons}>
               <Play
@@ -164,8 +169,10 @@ const App = () => {
               />
             ))}
           </div>
+
         </div>
       </div>
+
       <LoopOptions
         scale={scale}
         lowNote={lowNote}

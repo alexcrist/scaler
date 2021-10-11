@@ -1,4 +1,3 @@
-
 export const COLOR_1 = '#8338ec';
 export const COLOR_2 = '#ff006e';
 export const COLOR_3 = '#3a86ff';

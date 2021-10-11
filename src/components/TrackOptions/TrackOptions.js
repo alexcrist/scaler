@@ -1,8 +1,8 @@
 import { useState } from 'react';
+import { FaTrash, FaVolumeDown, FaVolumeMute } from 'react-icons/fa';
 import { OPACITY_1 } from '../../constants/colors';
+import { formulaToData } from '../../util/formulaEvaluator';
 import styles from './TrackOptions.module.css';
-import { FaTrash, FaVolumeMute, FaVolumeDown } from 'react-icons/fa';
-import formulaToData from '../../util/formulaToData';
 
 const Input = ({ color, index, isError, ...props }) => {
   const borderColor = color;
@@ -102,12 +102,14 @@ const Icons = ({
   return (
     <div className={styles.icons}>
       <div
+        title='Mute'
         onClick={onMute}
         className={muteClasses.join(' ')}
       >
         <MuteIcon className={styles.muteIcon} />
       </div>
       <div
+        title='Delete'
         onClick={onDelete}
         className={styles.icon}
       >

@@ -32,10 +32,6 @@
   margin-bottom: 30px;
 }
 
-.buttons > * {
-  flex: 1;
-}
-
 .buttons > *:first-child {
   margin-right: 10px;
 }

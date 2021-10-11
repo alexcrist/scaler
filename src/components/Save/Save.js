@@ -4,7 +4,8 @@ import styles from './Save.module.css';
 
 const Save = ({ onSave }) => {
   return (
-    <div 
+    <div
+      title='Save'
       onClick={onSave}
       className={styles.save}
       style={{
