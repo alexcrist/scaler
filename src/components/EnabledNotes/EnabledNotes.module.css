@@ -38,9 +38,9 @@
 }
 
 .button:hover {
-  opacity: 0.7;
+  opacity: 0.85;
 }
 
 .button.disabled:hover {
-  opacity: 0.8;
+  opacity: 0.4;
 }
