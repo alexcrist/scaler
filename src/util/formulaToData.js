@@ -9,17 +9,28 @@ const formulaToData = (formula, xValues) => {
 
   formula = formula.substring(2);
 
-  const data = [];
+  let yValues = [];
   for (const x of xValues) {
     try {
-      const value = Parser.evaluate(formula, { x });
-      data.push(value);
+      const y = Parser.evaluate(formula, { x });
+      yValues.push(y);
     } catch (e) {
       throw Error('Formula evaluation error: ' + formula);
     }
   }
 
-  return data;
+  // Cap big / small numbers
+  const cap = 50;
+  yValues = yValues.map((y) => {
+    if (y > cap) {
+      return cap;
+    } else if (y < -cap) {
+      return -cap;
+    }
+    return y;
+  });
+
+  return yValues;
 };
 
 export default formulaToData;
