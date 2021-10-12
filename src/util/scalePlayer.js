@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { NOTE_MAP } from '../constants/notes';
 import { play } from './audioPlayer';
 
@@ -66,7 +65,7 @@ export const playScale = (scaleData, wasPlaying = false, playId = numPlays) => {
 
   // Multiply BPM times four to represent quarter
   const delay = msPerLoop * numLoopsToQueue;
-  setTimeout(() => playScale(dataRef, true, playId), delay);
+  setTimeout(() => playScale(scaleData, true, playId), delay);
 };
 
 export const stopScale = () => {

@@ -12,7 +12,7 @@ const Save = ({
   tracks
 }) => {
 
-  const onSave = () => {
+  const onSave = async () => {
     const hash = toHash({ bpm, numBeats, noteRange, scale, lowNote, tracks });
     const url = window.location.origin + window.location.pathname + '?d=' + hash;
     try {
