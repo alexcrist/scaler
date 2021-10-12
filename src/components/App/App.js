@@ -1,10 +1,9 @@
 import _ from 'lodash';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { SCALES } from '../../constants/scales';
 import { saveLocal } from '../../util/localStorage';
 import { calculateNotes } from '../../util/noteCalculator';
 import { playScale, stopScale } from '../../util/scalePlayer';
-import { toHash } from '../../util/stateHasher';
 import { loadInitialState } from '../../util/stateLoader';
 import AddTrack from '../AddTrack/AddTrack';
 import Chart from '../Chart/Chart.js';
@@ -40,25 +39,6 @@ const App = () => {
     );
   }, [tracks, numBeats, noteRange, scale, lowNote]);
 
-  // Ref for scale player data =================================================
-
-  const scalePlayerData = useRef({
-    tracks,
-    bpm,
-    notes,
-    numBeats,
-    isPlaying
-  });
-  useEffect(() => {
-    scalePlayerData.current = {
-      tracks,
-      bpm,
-      notes,
-      numBeats,
-      isPlaying,
-    };
-  }, [tracks, bpm, notes, numBeats, isPlaying]);
-
   // On page load ==============================================================
 
   useEffect(() => {
@@ -83,9 +63,15 @@ const App = () => {
   useEffect(() => {
     stopScale();
     if (isPlaying) {
-      playScale(scalePlayerData);
+      playScale({
+        tracks,
+        bpm,
+        notes,
+        numBeats,
+        isPlaying
+      });
     }
-  }, [tracks, bpm, numBeats, noteRange, scale, lowNote, isPlaying]);
+  }, [isPlaying, tracks, bpm, notes, numBeats]);
 
   // Save to local storage =====================================================
 
@@ -95,17 +81,6 @@ const App = () => {
   }, [bpm, numBeats, noteRange, scale, lowNote, tracks]);
 
   // Event handlers ============================================================
-
-  const onSave = async () => {
-    const hash = toHash({ bpm, numBeats, noteRange, scale, lowNote, tracks });
-    const url = window.location.origin + window.location.pathname + '?d=' + hash;
-    try {
-      await navigator.clipboard.writeText(url);
-      alert('A link to your work has been copied to your clipboard.');
-    } catch (e) {
-      prompt('Save the following URL to access your work:', url);
-    }
-  };
 
   const createSetTrack = (index) => (track) => {
     const newTracks = _.cloneDeep(tracks);
@@ -162,7 +137,14 @@ const App = () => {
                 tracks={tracks}
                 setTracks={setTracks}
               />
-              <Save onSave={onSave} />
+              <Save
+                bpm={bpm}
+                numBeats={numBeats}
+                noteRange={noteRange}
+                scale={scale}
+                lowNote={lowNote}
+                tracks={tracks}
+              />
               <More
                 bpm={bpm}
                 tracks={tracks}

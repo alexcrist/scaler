@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { NOTE_MAP } from '../constants/notes';
 import { play } from './audioPlayer';
 
@@ -9,7 +10,7 @@ let numPlays = 0;
 
 const numLoopsToQueue = 4;
 
-export const playScale = (dataRef, wasPlaying = false, playId = numPlays) => {
+export const playScale = (scaleData, wasPlaying = false, playId = numPlays) => {
 
   const {
     tracks,
@@ -17,7 +18,7 @@ export const playScale = (dataRef, wasPlaying = false, playId = numPlays) => {
     notes,
     numBeats,
     isPlaying,
-  } = dataRef.current;
+  } = scaleData;
 
   // Explanation of 'playId !== numPlays':
   //   If the user stops then starts the scale without major delay,
