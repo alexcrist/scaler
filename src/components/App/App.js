@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { SCALES } from '../../constants/scales';
 import { saveLocal } from '../../util/localStorage';
 import { calculateNotes } from '../../util/noteCalculator';
-import { playScale } from '../../util/scalePlayer';
+import { playScale, stopScale } from '../../util/scalePlayer';
 import { toHash } from '../../util/stateHasher';
 import { loadInitialState } from '../../util/stateLoader';
 import AddTrack from '../AddTrack/AddTrack';
@@ -81,10 +81,11 @@ const App = () => {
   // Play and pause scale player ===============================================
 
   useEffect(() => {
+    stopScale();
     if (isPlaying) {
       playScale(scalePlayerData);
     }
-  }, [isPlaying]);
+  }, [tracks, bpm, numBeats, noteRange, scale, lowNote, isPlaying]);
 
   // Save to local storage =====================================================
 
@@ -134,6 +135,10 @@ const App = () => {
                 isPlaying={isPlaying}
                 bpm={bpm}
                 numBeats={numBeats}
+                tracks={tracks}
+                noteRange={noteRange}
+                scale={scale}
+                lowNote={lowNote}
               />
             </div>
             {tracks.map((track, index) => (
