@@ -52,6 +52,18 @@ export const SCALES = [
   {
     name: 'B major',
     pitches: ['B', 'Db', 'Eb', 'E', 'Gb', 'Ab', 'Bb']
+  },
+  {
+    name: 'C major (pentatonic)',
+    pitches: ['C', 'D', 'E', 'G', 'A']
+  },
+  {
+    name: 'D minor (pentatonic)',
+    pitches: ['D', 'F', 'G', 'A', 'C']
+  },
+  {
+    name: 'D major (pentatonic)',
+    pitches: ['D', 'E', 'Gb', 'A', 'B']
   }
 ].map((scale) => {
   scale.notes = [];

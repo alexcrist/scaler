@@ -91,6 +91,14 @@ export const resetAudioNodes = () => {
 
 const generateId = () => Date.now();
 
+const isValidPositveNumber = (number) => {
+  return (
+    typeof number === 'number' &&
+    !isNaN(number) &&
+    number > 0
+  );
+}
+
 const buildAudioNode = (
   loopIndex,
   beatIndex,
@@ -106,9 +114,10 @@ const buildAudioNode = (
   const isActive = !(isTrackMuted || isNoteMuted);
   const duration = track.noteDuration / 1000;
   const startTime = loopStartTime + (loopIndex * secondsPerLoop) + (beatIndex * secondsPerBeat);
+  const isValid = isValidPositveNumber(freq) && isValidPositveNumber(duration);
   let volumeNode = null;
   let oscillatorNode = null;
-  if (isActive) {
+  if (isActive && isValid) {
     volumeNode = audioContext.createGain();
     volumeNode.connect(audioContext.destination);
     volumeNode.gain.setValueCurveAtTime(NOTE_SHAPE, startTime, duration);
