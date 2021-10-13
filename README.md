@@ -30,5 +30,5 @@ The project can be automatically deployed to GitHub with `npm run deploy`.
 
 ## 🔭 Future improvements
 
-* Improve audio performance on mobile (less reliance on `setTimeout`)
 * Add more scales (especially pentatonic)
+* Refactor audio player to allow settings changes while playing
