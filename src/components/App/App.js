@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import { useEffect, useMemo, useState } from 'react';
 import { SCALES } from '../../constants/scales';
+import { createAudioNodes, resetAudioNodes } from '../../util/audioPlayer';
 import { saveLocal } from '../../util/localStorage';
 import { calculateNotes } from '../../util/noteCalculator';
-import { playScale, stopScale } from '../../util/scalePlayer';
 import { loadInitialState } from '../../util/stateLoader';
 import AddTrack from '../AddTrack/AddTrack';
 import Chart from '../Chart/Chart.js';
@@ -58,20 +58,26 @@ const App = () => {
     setLowNote(lowNote);
   }, []);
 
-  // Play and pause scale player ===============================================
+  // Playing and pausing audio =================================================
 
   useEffect(() => {
-    stopScale();
     if (isPlaying) {
-      playScale({
+      createAudioNodes(
         tracks,
-        bpm,
         notes,
-        numBeats,
-        isPlaying
-      });
+        bpm,
+        numBeats
+      );
+    } else {
+      resetAudioNodes();
     }
-  }, [isPlaying, tracks, bpm, notes, numBeats]);
+  }, [
+    isPlaying,
+    tracks,
+    notes,
+    bpm,
+    numBeats
+  ]);
 
   // Save to local storage =====================================================
 
@@ -110,10 +116,6 @@ const App = () => {
                 isPlaying={isPlaying}
                 bpm={bpm}
                 numBeats={numBeats}
-                tracks={tracks}
-                noteRange={noteRange}
-                scale={scale}
-                lowNote={lowNote}
               />
             </div>
             {tracks.map((track, index) => (

@@ -32,31 +32,18 @@ const TimelineArm = ({
   isPlaying,
   numBeats,
   bpm,
-  tracks,
-  noteRange,
-  scale,
-  lowNote
 }) => {
-
   const armRef = useRef(null);
 
   useEffect(() => {
-
     // Multiply BPM times four to represent quarter notes
     const periodDuration = numBeats / (bpm * 4) * 60;
-
-    const animation  = isPlaying ? playAnimation : pauseAnimation;
-    animation(armRef.current, periodDuration);
-  }, [
-    isPlaying,
-    numBeats,
-    bpm,
-    tracks,
-    noteRange,
-    scale,
-    lowNote,
-    armRef
-  ]);
+    if (isPlaying) {
+      playAnimation(armRef.current, periodDuration);
+    } else {
+      pauseAnimation(armRef.current, periodDuration);
+    }
+  }, [isPlaying, numBeats, bpm]);
 
   return (
     <div
