@@ -31,4 +31,4 @@ The project can be automatically deployed to GitHub with `npm run deploy`.
 ## 🔭 Future improvements
 
 * Add more scales (especially pentatonic)
-* Refactor audio player to allow settings changes while playing
+* Add better local saving
