@@ -1,22 +1,21 @@
 # 📼 Scaler
 
-> Scaler is a web application that allows you to play notes according to mathematical formulas like `y = sin(x)`. 
+> Scaler is a web application that allows you to play scales according to mathematical equations like `y = sin(x)`. 
 
 https://alexcrist.github.io/scaler/
 
 ## 🪀 Features
 
-* Play notes according to mathematical formulas
 * Create and loop multiple formulas
 * Enable / disable particular beats
 * Save and share creations
 * Export to MIDI
-* Allows modification of:
+* Experiment with different
   * Note durations
-  * Tempo
+  * Tempos
   * Beats per measure
-  * Pitch range
-  * Scale
+  * Pitch ranges
+  * Scales
 
 ## 💻 Software developement
 
