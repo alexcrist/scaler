@@ -1,77 +1,27 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { FaEllipsisV } from 'react-icons/fa';
 import { GRAY_1, OPACITY_1 } from '../../constants/colors';
-import { downloadFile } from '../../util/fileDownloader';
-import { toMidiString } from '../../util/midiWriter';
+import { downloadMidi } from '../../util/midiWriter';
+import { shareUrl } from '../../util/sharer';
+import DropdownMenu from '../DropdownMenu/DropdownMenu';
 import styles from './More.module.css';
 
-const ExportToMidi = ({
-  setIsVisible,
-  bpm,
-  tracks,
-  notes,
-}) => {
-  const onClickExportToMidi = () => {
-    setIsVisible(false);
-    const midiString = toMidiString({ bpm, tracks, notes });
-    downloadFile('scaler.mid', midiString);
-  };
-  return (
-    <div
-      onClick={onClickExportToMidi}
-      className={styles.option}
-    >
-      Export to MIDI
-    </div>
-  );
-};
+const More = ({ saveData, notes }) => {
 
-const OverflowMenu = ({
-  isVisible,
-  setIsVisible,
-  bpm,
-  tracks,
-  notes
-}) => {
-
-  const classes = [styles.overflowMenu];
-  if (!isVisible) {
-    classes.push(styles.hidden);
-  }
-
-  return (
-    <div className={classes.join(' ')}>
-      <ExportToMidi
-        setIsVisible={setIsVisible}
-        bpm={bpm}
-        tracks={tracks}
-        notes={notes}
-      />
-    </div>
-  );
-};
-
-const More = (props) => {
-
-  const [isVisible, setIsVisible] = useState(false);
-
-  const onClickMore = () => {
-    setIsVisible(!isVisible);
-  };
-
-  // Close menu when user clicks somewhere else
   const moreRef = useRef(null);
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (moreRef.current && !moreRef.current.contains(e.target)) {
-        setIsVisible(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousdown', handleClickOutside);
-    };
-  }, [moreRef]);
+  const [isVisible, setIsVisible] = useState(false);
+  const onClickMore = () => setIsVisible(!isVisible);
+
+  const options = [
+    {
+      onClick: () => shareUrl(saveData),
+      label: 'Share'
+    },
+    {
+      onClick: () => downloadMidi({ ...saveData, notes }),
+      label: 'Export to MIDI'
+    }
+  ];
 
   return (
     <div
@@ -91,10 +41,12 @@ const More = (props) => {
           <FaEllipsisV />
         </div>
       </div>
-      <OverflowMenu
+
+      <DropdownMenu
         isVisible={isVisible}
         setIsVisible={setIsVisible}
-        {...props}
+        options={options}
+        containerRef={moreRef}
       />
     </div>
   );

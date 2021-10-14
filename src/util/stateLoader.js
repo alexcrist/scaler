@@ -1,7 +1,7 @@
 import { COLORS } from '../constants/colors';
 import { SCALES } from '../constants/scales';
-import { fromHash } from './stateHasher';
-import { loadLocal } from './localStorage';
+import { fromHash } from './objectCompressor';
+import { loadRecent } from './storageManager';
 
 const defaultData = {
   bpm: 60,
@@ -41,7 +41,7 @@ export const loadInitialState = () => {
   if (data) {
     return fromHash(data);
   }
-  data = loadLocal();
+  data = loadRecent();
   if (data) {
     return data;
   }

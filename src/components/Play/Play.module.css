@@ -18,6 +18,27 @@
   opacity: 0.7;
 }
 
-.playText {
-  padding: 5px;
+.playIcon {
+  display: none;
+  padding: 5px 30px;
+}
+
+.playIcon > * {
+  width: 15px;
+  height: 15px;
+}
+
+@media screen and (max-width: 770px) {
+  .play {
+    flex: 0
+  }
+
+  .playIcon {
+    display: flex;
+    padding: 5px 10px;
+  }
+
+  .playText {
+    display: none;
+  }
 }

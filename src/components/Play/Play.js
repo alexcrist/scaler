@@ -1,8 +1,8 @@
+import { FaPlay, FaStop } from 'react-icons/fa';
 import styles from './Play.module.css';
 
 const Play = ({ isPlaying, setIsPlaying }) => {
 
-  const text = isPlaying ? 'Stop' : 'Play';
   const playStyle = isPlaying
     ? {
       borderColor: '#980031',
@@ -12,7 +12,6 @@ const Play = ({ isPlaying, setIsPlaying }) => {
       borderColor: '#489900',
       backgroundColor: '#48990099'
     };
-
 
   const onPlay = () => {
     setIsPlaying(!isPlaying);
@@ -24,7 +23,15 @@ const Play = ({ isPlaying, setIsPlaying }) => {
       className={styles.play}
       style={playStyle}
     >
-      <div className={styles.playText}>{text}</div>
+      <div className={styles.playText}>
+        {isPlaying ? 'Stop' : 'Play'}
+      </div>
+      <div className={styles.playIcon}>
+        {isPlaying
+          ? <FaStop />
+          : <FaPlay />
+        }
+      </div>
     </div>
   );
 };

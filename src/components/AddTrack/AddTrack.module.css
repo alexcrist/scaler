@@ -13,8 +13,22 @@
   opacity: 0.7;
 }
 
-.createTrackText {
-  color: white;
+.createTrackText::before {
+  content: 'Add track';
   font-size: 15px;
+  color: white;
   text-align: center;
+}
+
+@media screen and (max-width: 700px) {
+  .createTrackText::before {
+    content: 'Add';
+    padding: 5px 10px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .createTrackText::before {
+    content: 'Add track';
+  }
 }

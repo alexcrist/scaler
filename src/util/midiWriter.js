@@ -1,18 +1,12 @@
 import MidiWriter from 'midi-writer-js';
+import { downloadFile } from './fileDownloader';
 
-const msToTicks = (ms, bpm) => {
-  const tempo = Math.round((60 * 1000000) / bpm);
-  const ticksPerBeat = 128;
-  const seconds = ms / 1000;
-  const ticks = Math.round(seconds / (tempo * 1e-6 / ticksPerBeat));
-  return ticks;
+export const downloadMidi = ({ bpm, tracks, notes }) => {
+  const midiString = toMidiString({ bpm, tracks, notes });
+  downloadFile('scaler.mid', midiString);
 };
 
-export const toMidiString = ({
-  bpm,
-  tracks,
-  notes
-}) => {
+const toMidiString = ({ bpm, tracks, notes }) => {
 
   // BPM times four to represent quarter notes
   const msPerBeat = (1 / (bpm * 4)) * 60 * 1000;
@@ -58,4 +52,12 @@ export const toMidiString = ({
   const writer = new MidiWriter.Writer(midiTracks);
   const midiString = writer.dataUri();
   return midiString;
+};
+
+const msToTicks = (ms, bpm) => {
+  const tempo = Math.round((60 * 1000000) / bpm);
+  const ticksPerBeat = 128;
+  const seconds = ms / 1000;
+  const ticks = Math.round(seconds / (tempo * 1e-6 / ticksPerBeat));
+  return ticks;
 };

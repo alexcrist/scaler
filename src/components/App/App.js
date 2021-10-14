@@ -2,18 +2,19 @@ import _ from 'lodash';
 import { useEffect, useMemo, useState } from 'react';
 import { SCALES } from '../../constants/scales';
 import { createAudioNodes, resetAudioNodes } from '../../util/audioPlayer';
-import { saveLocal } from '../../util/localStorage';
 import { calculateNotes } from '../../util/noteCalculator';
 import { loadInitialState } from '../../util/stateLoader';
+import { storeRecent } from '../../util/storageManager';
 import AddTrack from '../AddTrack/AddTrack';
 import Chart from '../Chart/Chart.js';
 import EnabledNotes from '../EnabledNotes/EnabledNotes';
+import Header from '../Header/Header';
+import Load from '../Load/Load';
 import LoopOptions from '../LoopOptions/LoopOptions';
 import More from '../More/More';
 import Play from '../Play/Play';
 import Save from '../Save/Save';
 import TimelineArm from '../TimelineArm/TimelineArm';
-import Title from '../Title/Title';
 import TrackOptions from '../TrackOptions/TrackOptions.js';
 import styles from './App.module.css';
 
@@ -79,12 +80,21 @@ const App = () => {
     numBeats
   ]);
 
-  // Save to local storage =====================================================
+  // Local storage =============================================================
+
+  const saveData = useMemo(() => ({
+    bpm,
+    numBeats,
+    noteRange,
+    scale,
+    lowNote,
+    tracks
+  }), [bpm, numBeats, noteRange, scale, lowNote, tracks]);
 
   useEffect(() => {
     window.history.pushState({}, '', window.location.origin + window.location.pathname);
-    saveLocal({ bpm, numBeats, noteRange, scale, lowNote, tracks });
-  }, [bpm, numBeats, noteRange, scale, lowNote, tracks]);
+    storeRecent(saveData);
+  }, [saveData]);
 
   // Event handlers ============================================================
 
@@ -100,7 +110,7 @@ const App = () => {
     <div className={styles.app}>
       <div>
 
-        <Title />
+        <Header />
 
         <div className={styles.row}>
 
@@ -139,17 +149,17 @@ const App = () => {
                 tracks={tracks}
                 setTracks={setTracks}
               />
-              <Save
-                bpm={bpm}
-                numBeats={numBeats}
-                noteRange={noteRange}
-                scale={scale}
-                lowNote={lowNote}
-                tracks={tracks}
+              <Save saveData={saveData} />
+              <Load 
+                setBpm={setBpm}
+                setNumBeats={setNumBeats}
+                setNoteRange={setNoteRange}
+                setScale={setScale}
+                setLowNote={setLowNote}
+                setTracks={setTracks}
               />
               <More
-                bpm={bpm}
-                tracks={tracks}
+                saveData={saveData}
                 notes={notes}
               />
             </div>

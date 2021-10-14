@@ -34,16 +34,16 @@ export const formulaToData = (formula, xValues) => {
     return y;
   });
 
-  // Convert NaN to 0
-  yValues = yValues.map((y) => isNaN(y) ? 0 : y);
-
   // Handle bad values (functions)
   for (const y of yValues)  {
-    if (typeof y !== 'number' || isNaN(y)) {
+    if (typeof y !== 'number') {
       console.error('Error in y-values:', yValues);
       throw Error('Formula produced invalid values: ' + formula);
     }
   }
+
+  // Convert NaN to 0
+  yValues = yValues.map((y) => isNaN(y) ? 0 : y);
 
   return {
     yValues,

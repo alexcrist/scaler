@@ -27,9 +27,7 @@ const AddTrack = ({ tracks, setTracks }) => {
         backgroundColor: GRAY_1 + OPACITY_1,
       }}
     >
-      <div className={styles.createTrackText}>
-        Add track
-      </div>
+      <div className={styles.createTrackText} />
     </div>
   );
 };

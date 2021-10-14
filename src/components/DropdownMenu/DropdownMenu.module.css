@@ -1,0 +1,34 @@
+.dropdown {
+  background-color: #fff;
+  border: 2px solid #858585;
+  border-radius: 2px;
+  position: absolute;
+  right: 0;
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.hidden {
+  display: none;
+}
+
+.option {
+  min-width: 130px;
+  max-width: 300px;
+  cursor: pointer;
+  padding: 8px 15px;
+  transition: all 100ms;
+  font-size: 15px;
+  user-select: none;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.option:not(:last-child) {
+  border-bottom: 1px solid #eee;
+}
+
+.option:hover {
+  background-color: #eee;
+}

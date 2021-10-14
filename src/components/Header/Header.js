@@ -1,6 +1,6 @@
-import styles from './Title.module.css';
+import styles from './Header.module.css';
 
-const Title = () => {
+const Header = () => {
   return (
     <div className={styles.container}>
       <div className={styles.text}>
@@ -18,4 +18,4 @@ const Title = () => {
   );
 };
 
-export default Title;
+export default Header;
