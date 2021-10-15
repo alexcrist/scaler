@@ -26,3 +26,16 @@
 .input:disabled {
   opacity: 1;
 }
+
+.scaleInputGroup {
+  margin-right: 0px;
+  min-width: 200px;
+}
+
+.scaleSelects {
+  display: flex;
+}
+
+.scaleSelects > :first-child {
+  width: 70px;
+}

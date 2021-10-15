@@ -1,77 +1,60 @@
+import _ from 'lodash';
 import { NOTES } from "./notes";
 
-export const SCALES = [
+export const PITCHES = [
+  'C',  'Db', 'D',  'Eb',
+  'E',  'F',  'Gb', 'G',
+  'Ab', 'A',  'Bb', 'B'
+];
+
+export const MODES = [
   {
-    name: 'C major',
-    pitches: ['C', 'D', 'E', 'F', 'G', 'A', 'B']
+    name: 'Major',
+    steps: [2, 2, 1, 2, 2, 2, 1]
   },
   {
-    name: 'D minor',
-    pitches: ['D', 'E', 'F', 'G', 'A', 'Bb', 'C']
+    name: 'Minor',
+    steps: [2, 1, 2, 2, 1, 2, 2]
   },
   {
-    name: 'D major',
-    pitches: ['D', 'E', 'Gb', 'G', 'A', 'B', 'Db']
+    name: 'Major (pentatonic)',
+    steps: [2, 2, 3, 2, 3]
   },
   {
-    name: 'E minor',
-    pitches: ['E', 'Gb', 'G', 'A', 'B', 'C', 'D']
-  },
-  {
-    name: 'E major',
-    pitches: ['E', 'Gb', 'G', 'A', 'B', 'C', 'D']
-  },
-  {
-    name: 'F minor',
-    pitches: ['F', 'G', 'Ab', 'Bb', 'C', 'Db', 'Eb']
-  },
-  {
-    name: 'F major',
-    pitches: ['F', 'G', 'A', 'Bb', 'C', 'D', 'E']
-  },
-  {
-    name: 'G minor',
-    pitches: ['G', 'A', 'Bb', 'C', 'D', 'Eb', 'F']
-  },
-  {
-    name: 'G major',
-    pitches: ['G', 'A', 'B', 'C', 'D', 'E', 'Gb']
-  },
-  {
-    name: 'A minor',
-    pitches: ['A', 'B', 'C', 'D', 'E', 'F', 'G']
-  },
-  {
-    name: 'A major',
-    pitches: ['A', 'B', 'Db', 'D', 'E', 'Gb', 'Ab']
-  },
-  {
-    name: 'B minor',
-    pitches: ['B', 'Db', 'D', 'E', 'Gb', 'G', 'A']
-  },
-  {
-    name: 'B major',
-    pitches: ['B', 'Db', 'Eb', 'E', 'Gb', 'Ab', 'Bb']
-  },
-  {
-    name: 'C major (pentatonic)',
-    pitches: ['C', 'D', 'E', 'G', 'A']
-  },
-  {
-    name: 'D minor (pentatonic)',
-    pitches: ['D', 'F', 'G', 'A', 'C']
-  },
-  {
-    name: 'D major (pentatonic)',
-    pitches: ['D', 'E', 'Gb', 'A', 'B']
+    name: 'Minor (pentatonic)',
+    steps: [3, 2, 2, 3, 2]
   }
-].map((scale) => {
-  scale.notes = [];
-  for (const note of NOTES) {
-    const pitch = note.substring(0, note.length - 1);
-    if (scale.pitches.includes(pitch)) {
-      scale.notes.push(note);
-    }
-  }
+];
+
+const getScalePitches = (pitch, steps) => {
+  let index = PITCHES.indexOf(pitch);
+  const scale = steps.map((step) => {
+    index = (index + step) % PITCHES.length;
+    return PITCHES[index];
+  });
+  scale.unshift(scale.pop());
   return scale;
-});
+};
+
+let scales = [];
+for (const pitch of PITCHES) {
+  for (const mode of MODES) {
+    const scalePitches = getScalePitches(pitch, mode.steps);
+    const scaleNotes = NOTES.filter((note) => {
+      const notePitch = note.substring(0, note.length - 1);
+      return scalePitches.includes(notePitch);
+    })
+    scales.push({
+      name: `${pitch} ${mode.name}`,
+      pitches: scalePitches,
+      notes: scaleNotes
+    })
+  }
+}
+
+scales = _.sortBy(scales, [
+  (o) => o.name.includes('pentatonic') ? 1 : 0,
+  (o) => PITCHES.indexOf(o.pitches[0])
+]);
+
+export const SCALES = scales;
