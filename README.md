@@ -17,7 +17,7 @@ https://alexcrist.github.io/scaler/
   * Pitch ranges
   * Scales
 
-## 💻 Software developement
+## 💻 Software development
 
 To run the project locally, you'll need Node (v14.17.4) and NPM (v7.20.6).
 
