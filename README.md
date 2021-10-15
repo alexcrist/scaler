@@ -29,4 +29,4 @@ The project can be automatically deployed to GitHub with `npm run deploy`.
 
 ## 🔭 Future improvements
 
-* Add more scales (especially pentatonic)
+* Add more scales
