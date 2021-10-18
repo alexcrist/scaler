@@ -1,6 +1,6 @@
 # 📼 Scaler
 
-> Scaler is a web application that allows you to play scales according to mathematical equations like `y = sin(x)`. 
+> Scaler is a web application that allows you to play scales according to math equations like `y = sin(x)`. 
 
 https://alexcrist.github.io/scaler/
 
