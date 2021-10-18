@@ -23,7 +23,7 @@ To run the project locally, you'll need Node (v14.17.4) and NPM (v7.20.6).
 
 After cloning or downloading the code, install the project's dependencies with `npm install`.
 
-From there, you can run the project by starting the developement server with `npm run start`.
+From there, you can run the project by starting the development server with `npm run start`.
 
 The project can be automatically deployed to GitHub with `npm run deploy`.
 
