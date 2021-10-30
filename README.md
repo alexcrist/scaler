@@ -30,3 +30,4 @@ The project can be automatically deployed to GitHub with `npm run deploy`.
 ## 🔭 Future improvements
 
 * Add more scales
+* Allow note duration to be a function
